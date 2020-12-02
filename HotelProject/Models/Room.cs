@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,34 +9,29 @@ namespace HotelProject.Models
     public class Room
     {
         //מס' חדר
+        [Key]
+        [Required]
         public int Id { get; set; }
 
         //סוג חדר
+        [Required]
         public int Type { get; set; }
 
-        //מס' מיטות נוספות
-        public int ExtraBeds { get; set; }
-
         //האם מיטה זוגית ו 2 מיטות יחיד
+        [Required]
         public bool IsTwinBed { get; set; }
 
         //קומה
+        [Required]
         public int Floor { get; set; }
 
-        //נוף
-        public int View { get; set; }
-
-        //האם יש מרפסת
-        public bool IsBalcony { get; set; }
-
-        //מחיר בסיסי לזוג
-        public double BasicPrice { get; set; }
-
         //האם פנוי
+        [Required]
         public bool IsAvailable { get; set; }
 
         //מס' הזמנה פעילה לחדר
-        public Order OrderId { get; set; }
+        [Required]
+        public ICollection<RoomsOrders> Orders { get; set; }
 
     }
 }
