@@ -18,10 +18,14 @@ namespace HotelProject.Models
 
         //מתאריך
         [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime FromDate { get; set; }
 
         //עד תאריך
         [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime ToDate { get; set; }
 
         //מס' מבוגרים
@@ -34,6 +38,7 @@ namespace HotelProject.Models
 
         //מס' תינוקות
         [Required]
+        //[DataType(DataType.)]
         public int NumOfInfants { get; set; }
 
         //רשימת החדרים בהזמנה

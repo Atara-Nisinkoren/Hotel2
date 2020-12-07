@@ -15,7 +15,7 @@ namespace HotelProject.Models
 
         //סוג חדר
         [Required]
-        public int Type { get; set; }
+        public RoomType Type { get; set; }
 
         //האם מיטה זוגית ו 2 מיטות יחיד
         [Required]
@@ -25,9 +25,9 @@ namespace HotelProject.Models
         [Required]
         public int Floor { get; set; }
 
-        //האם פנוי
+       /* //האם פנוי
         [Required]
-        public bool IsAvailable { get; set; }
+        public bool IsAvailable { get; set; }*/
 
         //מס' הזמנה פעילה לחדר
         [Required]

@@ -22,10 +22,12 @@ namespace HotelProject.Models
 
         //מספר פלאפון
         [Required]
+        [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
 
         //אימייל
         [Required]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
         //תפקיד העובד

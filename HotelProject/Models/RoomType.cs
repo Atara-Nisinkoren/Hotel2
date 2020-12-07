@@ -37,6 +37,7 @@ namespace HotelProject.Models
 
         //תמונה
         [Required]
+        [DataType(DataType.ImageUrl)]
         public string ImgUrl { get; set; }
 
         //חדרים
