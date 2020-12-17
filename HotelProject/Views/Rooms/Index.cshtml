@@ -21,9 +21,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Floor)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.IsAvailable)
-            </th>
+            </th>*@
             <th></th>
         </tr>
     </thead>
@@ -39,9 +39,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Floor)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.IsAvailable)
-            </td>
+            </td>*@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

@@ -34,7 +34,7 @@ namespace HotelProject.Controllers
             }
 
             var client = await _context.Client
-                .FirstOrDefaultAsync(m => m.Tz == id);
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (client == null)
             {
                 return NotFound();
@@ -88,7 +88,7 @@ namespace HotelProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id, [Bind("Tz,Name,PhoneNumber,Address,Email")] Client client)
         {
-            if (id != client.Tz)
+            if (id != client.ID)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace HotelProject.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ClientExists(client.Tz))
+                    if (!ClientExists(client.ID))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace HotelProject.Controllers
             }
 
             var client = await _context.Client
-                .FirstOrDefaultAsync(m => m.Tz == id);
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (client == null)
             {
                 return NotFound();
@@ -147,7 +147,7 @@ namespace HotelProject.Controllers
 
         private bool ClientExists(string id)
         {
-            return _context.Client.Any(e => e.Tz == id);
+            return _context.Client.Any(e => e.ID == id);
         }
     }
 }
