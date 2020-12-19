@@ -22,6 +22,7 @@ namespace HotelProject.Controllers
         // GET: Clients
         public async Task<IActionResult> Index()
         {
+            
             return View(await _context.Client.ToListAsync());
         }
 
