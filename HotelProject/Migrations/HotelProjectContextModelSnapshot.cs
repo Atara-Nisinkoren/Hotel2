@@ -21,7 +21,7 @@ namespace HotelProject.Migrations
 
             modelBuilder.Entity("HotelProject.Models.Client", b =>
                 {
-                    b.Property<string>("Tz")
+                    b.Property<string>("ID")
                         .HasColumnType("nvarchar(9)")
                         .HasMaxLength(9);
 
@@ -45,7 +45,7 @@ namespace HotelProject.Migrations
                         .HasColumnType("nvarchar(10)")
                         .HasMaxLength(10);
 
-                    b.HasKey("Tz");
+                    b.HasKey("ID");
 
                     b.ToTable("Client");
                 });
@@ -57,7 +57,7 @@ namespace HotelProject.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ClientTz")
+                    b.Property<string>("ClientID")
                         .IsRequired()
                         .HasColumnType("nvarchar(9)");
 
@@ -81,7 +81,7 @@ namespace HotelProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClientTz");
+                    b.HasIndex("ClientID");
 
                     b.ToTable("Order");
                 });
@@ -96,21 +96,15 @@ namespace HotelProject.Migrations
                     b.Property<int>("Floor")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsAvailable")
-                        .HasColumnType("bit");
-
                     b.Property<bool>("IsTwinBed")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("RoomTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Type")
+                    b.Property<int>("TypeId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RoomTypeId");
+                    b.HasIndex("TypeId");
 
                     b.ToTable("Room");
                 });
@@ -154,21 +148,14 @@ namespace HotelProject.Migrations
             modelBuilder.Entity("HotelProject.Models.RoomsOrders", b =>
                 {
                     b.Property<int>("RoomId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<int>("RoomId1")
-                        .HasColumnType("int");
-
-                    b.HasKey("RoomId");
+                    b.HasKey("RoomId", "OrderId");
 
                     b.HasIndex("OrderId");
-
-                    b.HasIndex("RoomId1");
 
                     b.ToTable("RoomsOrders");
                 });
@@ -208,16 +195,18 @@ namespace HotelProject.Migrations
                 {
                     b.HasOne("HotelProject.Models.Client", "Client")
                         .WithMany("Orders")
-                        .HasForeignKey("ClientTz")
+                        .HasForeignKey("ClientID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("HotelProject.Models.Room", b =>
                 {
-                    b.HasOne("HotelProject.Models.RoomType", null)
+                    b.HasOne("HotelProject.Models.RoomType", "Type")
                         .WithMany("Rooms")
-                        .HasForeignKey("RoomTypeId");
+                        .HasForeignKey("TypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("HotelProject.Models.RoomsOrders", b =>
@@ -230,7 +219,7 @@ namespace HotelProject.Migrations
 
                     b.HasOne("HotelProject.Models.Room", "Room")
                         .WithMany("Orders")
-                        .HasForeignKey("RoomId1")
+                        .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
