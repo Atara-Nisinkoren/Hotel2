@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelProject.Migrations
 {
     [DbContext(typeof(HotelProjectContext))]
-    [Migration("20201219200344_CreateDB")]
-    partial class CreateDB
+    [Migration("20201227183909_NewDB")]
+    partial class NewDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
