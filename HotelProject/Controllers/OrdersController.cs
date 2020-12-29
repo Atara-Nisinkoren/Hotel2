@@ -42,6 +42,10 @@ namespace HotelProject.Controllers
 
             return View(order);
         }
+        public IActionResult Payment()
+        {
+            return View();
+        }
 
         // GET: Orders/Create
         public IActionResult Create()

@@ -1,0 +1,46 @@
+﻿
+* {
+    text-align: center;
+    background-color: white;
+}
+
+body {
+    background-color: white;
+    margin-top: 20px;
+    direction: rtl;
+    position: center;
+}
+
+h1 {
+    color: gold;
+    text-decoration: underline;
+}
+
+div {
+    color: rgb(177, 154, 28);
+}
+
+.btn {
+    padding: 25px;
+}
+
+.btn-primary {
+    color: black;
+    background-color: gold;
+    border-color: black;
+}
+
+.btn-warning:hover {
+    background-color: gold important !;
+}
+
+#btn_invite {
+    width: 50%;
+    text-align: center;
+    margin-left: 20%;
+    margin-right: 30%;
+}
+
+ul {
+    list-style: none;
+}
