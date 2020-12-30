@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HotelProject.Migrations
 {
-    public partial class CreateDB : Migration
+    public partial class NewDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,7 +11,7 @@ namespace HotelProject.Migrations
                 name: "Client",
                 columns: table => new
                 {
-                    Tz = table.Column<string>(maxLength: 9, nullable: false),
+                    ID = table.Column<string>(maxLength: 9, nullable: false),
                     Name = table.Column<string>(maxLength: 50, nullable: false),
                     PhoneNumber = table.Column<string>(maxLength: 10, nullable: false),
                     Address = table.Column<string>(maxLength: 100, nullable: false),
@@ -19,7 +19,7 @@ namespace HotelProject.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Client", x => x.Tz);
+                    table.PrimaryKey("PK_Client", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -64,7 +64,7 @@ namespace HotelProject.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ClientTz = table.Column<string>(nullable: false),
+                    ClientID = table.Column<string>(nullable: false),
                     FromDate = table.Column<DateTime>(nullable: false),
                     ToDate = table.Column<DateTime>(nullable: false),
                     NumOfAdults = table.Column<int>(nullable: false),
@@ -76,10 +76,10 @@ namespace HotelProject.Migrations
                 {
                     table.PrimaryKey("PK_Order", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Order_Client_ClientTz",
-                        column: x => x.ClientTz,
+                        name: "FK_Order_Client_ClientID",
+                        column: x => x.ClientID,
                         principalTable: "Client",
-                        principalColumn: "Tz",
+                        principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -89,35 +89,31 @@ namespace HotelProject.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Type = table.Column<int>(nullable: false),
+                    TypeId = table.Column<int>(nullable: false),
                     IsTwinBed = table.Column<bool>(nullable: false),
-                    Floor = table.Column<int>(nullable: false),
-                    IsAvailable = table.Column<bool>(nullable: false),
-                    RoomTypeId = table.Column<int>(nullable: true)
+                    Floor = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Room", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Room_RoomType_RoomTypeId",
-                        column: x => x.RoomTypeId,
+                        name: "FK_Room_RoomType_TypeId",
+                        column: x => x.TypeId,
                         principalTable: "RoomType",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "RoomsOrders",
                 columns: table => new
                 {
-                    RoomId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RoomId1 = table.Column<int>(nullable: false),
+                    RoomId = table.Column<int>(nullable: false),
                     OrderId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RoomsOrders", x => x.RoomId);
+                    table.PrimaryKey("PK_RoomsOrders", x => new { x.RoomId, x.OrderId });
                     table.ForeignKey(
                         name: "FK_RoomsOrders_Order_OrderId",
                         column: x => x.OrderId,
@@ -125,32 +121,27 @@ namespace HotelProject.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_RoomsOrders_Room_RoomId1",
-                        column: x => x.RoomId1,
+                        name: "FK_RoomsOrders_Room_RoomId",
+                        column: x => x.RoomId,
                         principalTable: "Room",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_ClientTz",
+                name: "IX_Order_ClientID",
                 table: "Order",
-                column: "ClientTz");
+                column: "ClientID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Room_RoomTypeId",
+                name: "IX_Room_TypeId",
                 table: "Room",
-                column: "RoomTypeId");
+                column: "TypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RoomsOrders_OrderId",
                 table: "RoomsOrders",
                 column: "OrderId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RoomsOrders_RoomId1",
-                table: "RoomsOrders",
-                column: "RoomId1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

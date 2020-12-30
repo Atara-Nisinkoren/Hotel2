@@ -25,5 +25,21 @@ namespace HotelProject.Data
         public DbSet<HotelProject.Models.RoomType> RoomType { get; set; }
 
         public DbSet<HotelProject.Models.Worker> Worker { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<RoomsOrders>()
+                .HasKey(t => new { t.RoomId, t.OrderId });
+
+            modelBuilder.Entity<RoomsOrders>()
+                .HasOne(pt => pt.Room)
+                .WithMany(p => p.Orders)
+                .HasForeignKey(pt => pt.RoomId);
+
+            modelBuilder.Entity<RoomsOrders>()
+                .HasOne(pt => pt.Order)
+                .WithMany(t => t.Rooms)
+                .HasForeignKey(pt => pt.OrderId);
+        }
+
     }
 }
