@@ -23,6 +23,24 @@ namespace HotelProject.Controllers
             return View();
         }
 
+        public IActionResult events()
+        {
+            return View();
+        }
+        public IActionResult Exstaservices()
+        {
+            return View();
+        }
+
+        public IActionResult roomspages()
+        {
+            return View();
+        }
+      
+        public IActionResult aboutUs()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();
