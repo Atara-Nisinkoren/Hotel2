@@ -1,0 +1,11 @@
+.right{
+    direction: rtl;
+    text-align: right;
+}
+
+  .btn{
+      direction: ltr;
+  }
+  #more{
+      padding-top: 3%;
+  }

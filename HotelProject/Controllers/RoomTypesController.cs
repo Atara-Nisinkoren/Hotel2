@@ -13,6 +13,7 @@ namespace HotelProject.Controllers
     public class RoomTypesController : Controller
     {
         private readonly HotelProjectContext _context;
+        List<String> listImages;
 
         public RoomTypesController(HotelProjectContext context)
         {
@@ -39,7 +40,7 @@ namespace HotelProject.Controllers
             {
                 return NotFound();
             }
-
+            //listImages =roomType.ImgUrl.Split(',').ToList();
             return View(roomType);
         }
 
