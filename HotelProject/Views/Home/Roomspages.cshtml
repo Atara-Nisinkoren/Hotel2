@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="container rooms">
+    <div class="row">
+        <div class="col-md-4 col-sm-12 col-lg-4">
+            <a href="room_details.html" target="myFrame">
+                <h3>חדר דלוקס</h3>
+                <img src="~/img/5h6vVSTJ.jpeg" width="300" height="200">
+            </a>
+            <a href="room_details.html" target="myFrame">
+                <h3>סוויטת ג'וניור</h3>
+                <img src="~/img/9eRxqVat.jpeg" width="300" height="200">
+            </a>
+
+
+        </div>
+        <div class="col-md-4 col-sm-12 col-lg-4">
+            <a href="room_details.html" target="myFrame">
+                <h3>חדר קלאב</h3>
+                <img src="~/img/rPxsqSAq.jpeg" width="300" height="200">
+            </a>
+            <a href="room_details.html" target="myFrame">
+                <h3>סוויטת קלאב</h3>
+                <img src="~/img/oIyzYfCo.jpeg" width="300" height="200">
+            </a>
+
+
+        </div>
+        <div class="col-md-4 col-sm-12 col-lg-4">
+            <a href="room_details.html" target="myFrame">
+                <h3>חדר קלאסי</h3>
+                <img src="~/img/חדר.jpeg" width="300" height="200">
+            </a>
+            <a asp-controller="Room" asp-action="Details" a>
+                <h3>חדר משפחה</h3>
+                <img src="~/img/MVo3nxar.jpeg" width="300" height="200">
+            </a>
+        </div>
+    </div>
+</div>
+@section Css{
+    <link rel="stylesheet" href="~/css/Exstaservices.css" />
+}

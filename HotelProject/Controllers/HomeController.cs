@@ -1,5 +1,6 @@
 ﻿using HotelProject.Data;
 using HotelProject.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -22,6 +23,20 @@ namespace HotelProject.Controllers
         }
 
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult events()
+        {
+            return View();
+        }
+        public IActionResult Exstaservices()
+        {
+            return View();
+        }
+
+        public IActionResult aboutUs()
         {
             return View();
         }
