@@ -29,6 +29,11 @@ namespace HotelProject
 
             services.AddDbContext<HotelProjectContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("HotelProjectContext")));
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(15);
+            }
+             );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,6 +54,8 @@ namespace HotelProject
 
             app.UseRouting();
 
+            app.UseSession();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -56,6 +63,8 @@ namespace HotelProject
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                //pattern: "{controller=Workers}/{action=Login}/{id?}");
+
             });
         }
     }

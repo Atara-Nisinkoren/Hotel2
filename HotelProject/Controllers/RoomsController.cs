@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HotelProject.Data;
 using HotelProject.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace HotelProject.Controllers
 {
@@ -46,6 +47,10 @@ namespace HotelProject.Controllers
         // GET: Rooms/Create
         public IActionResult Create()
         {
+            if (HttpContext.Session.GetString("Name") == null)
+            {
+                return RedirectToAction("Login", "Workers");
+            }
             return View();
         }
 
@@ -56,6 +61,10 @@ namespace HotelProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Type,IsTwinBed,Floor,IsAvailable")] Room room)
         {
+            if (HttpContext.Session.GetString("Name") == null)
+            {
+                return RedirectToAction("Login", "Workers");
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(room);
@@ -68,6 +77,10 @@ namespace HotelProject.Controllers
         // GET: Rooms/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (HttpContext.Session.GetString("Name") == null)
+            {
+                return RedirectToAction("Login", "Workers");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -88,6 +101,10 @@ namespace HotelProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Type,IsTwinBed,Floor,IsAvailable")] Room room)
         {
+            if (HttpContext.Session.GetString("Name") == null)
+            {
+                return RedirectToAction("Login", "Workers");
+            }
             if (id != room.Id)
             {
                 return NotFound();
@@ -130,7 +147,10 @@ namespace HotelProject.Controllers
             {
                 return NotFound();
             }
-
+            if (HttpContext.Session.GetString("Name") == null)
+            {
+                return RedirectToAction("Login", "Workers");
+            }
             return View(room);
         }
 
@@ -139,6 +159,7 @@ namespace HotelProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+
             var room = await _context.Room.FindAsync(id);
             _context.Room.Remove(room);
             await _context.SaveChangesAsync();

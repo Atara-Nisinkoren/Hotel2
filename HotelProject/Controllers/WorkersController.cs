@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HotelProject.Data;
 using HotelProject.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace HotelProject.Controllers
 {
@@ -18,10 +19,24 @@ namespace HotelProject.Controllers
         {
             _context = context;
         }
+        public async Task<IActionResult> Logout()
+        {
 
+            HttpContext.Session.Remove("Name");
+            {
+                return RedirectToAction("Index" , "Home");
+            }
+            return View(await _context.Worker.ToListAsync());
+        }
         // GET: Workers
         public async Task<IActionResult> Index()
         {
+
+
+            //if (HttpContext.Session.GetString("Name") == null)
+            //{
+            //    return RedirectToAction(nameof(Login));
+            //}
             return View(await _context.Worker.ToListAsync());
         }
 
@@ -40,6 +55,42 @@ namespace HotelProject.Controllers
                 return NotFound();
             }
 
+            return View(worker);
+        }
+
+        // GET: Workers/Create
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        // POST: Workers/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login([Bind("Id,WorkerId,Name,PhoneNumber,Email,WorkerType")] Worker worker)
+        {
+            var q = from a in _context.Worker
+                    where worker.Name == a.Name &&
+                          worker.WorkerId == a.WorkerId
+                    select a;
+
+            if (q.Count() > 0)
+            {
+                HttpContext.Session.SetString("Name", q.First().Name);
+                return RedirectToAction("Create", "RoomTypes");
+                return RedirectToAction("Delete", "RoomTypes");
+                return RedirectToAction("Edit", "RoomTypes");
+                return RedirectToAction("Create", "Rooms");
+                return RedirectToAction("Delete", "Rooms");
+                return RedirectToAction("Edit", "RoomTypes");
+                //return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                ViewData["Error"] = "Worker does not exist!";
+            }
             return View(worker);
         }
 
@@ -64,7 +115,6 @@ namespace HotelProject.Controllers
             }
             return View(worker);
         }
-
         // GET: Workers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

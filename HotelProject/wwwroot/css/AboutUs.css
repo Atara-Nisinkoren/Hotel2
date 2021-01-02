@@ -1,0 +1,17 @@
+﻿
+body {
+    text-align: center;
+    /* background-color: white;*/
+}
+
+h1 {
+    color: gold;
+    margin-top: 2%;
+    margin-bottom: 1%;
+}
+
+p {
+    text-align: right;
+    margin-right: 0%;
+    direction: rtl;
+}
