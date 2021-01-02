@@ -1,13 +1,13 @@
 ﻿
-/** {
+* {
     text-align: center;
     background-color: white;
-}*/
+}
 
 body {
     background-color: white;
     margin-top: 20px;
-   /* direction: rtl;*/
+    direction: rtl;
     position: center;
 }
 

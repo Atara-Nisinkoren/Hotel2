@@ -1,4 +1,7 @@
-﻿
+﻿* {
+    color: rgb(188,148,26);
+}
+
 body {
     text-align: center;
     /* background-color: white;*/
