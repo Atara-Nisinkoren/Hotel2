@@ -31,7 +31,7 @@ namespace HotelProject
                     options.UseSqlServer(Configuration.GetConnectionString("HotelProjectContext")));
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromMinutes(10);
+                options.IdleTimeout = TimeSpan.FromMinutes(15);
             }
              );
         }
@@ -63,6 +63,8 @@ namespace HotelProject
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                //pattern: "{controller=Workers}/{action=Login}/{id?}");
+
             });
         }
     }

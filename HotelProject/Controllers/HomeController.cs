@@ -1,4 +1,5 @@
 ﻿using HotelProject.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -32,11 +33,6 @@ namespace HotelProject.Controllers
             return View();
         }
 
-        public IActionResult roomspages()
-        {
-            return View();
-        }
-      
         public IActionResult aboutUs()
         {
             return View();

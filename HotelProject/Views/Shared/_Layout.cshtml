@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http;
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -6,13 +7,7 @@
     <title>@ViewData["Title"] - HotelProject</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/css/Payment.css" />
-    <link rel="stylesheet" href="~/css/ExstaServices.css" />
-    <link rel="stylesheet" href="~/css/roomspages.css" />
-    <link rel="stylesheet" href="~/css/aboutUs.css" />
-    <link rel="stylesheet" href="~/css/discounts.css" />
-    <link rel="stylesheet" href="~/images" />
-    <link rel="stylesheet" href="~/css/Layout.css" />
+   <link rel="stylesheet" href="~/css/Layout.css" />
     @RenderSection("Css", required: false)
 
 </head>
@@ -33,7 +28,17 @@
                                 <span>EN</span>
                             </div>
                             <div class="logo"> <img width="70px" src="~/img/logo.JPG" alt="logo"></div>
+                            @if (Context.Session.GetString("Name") != null)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Workers" asp-action="Index"> Login</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Workers" asp-action="Logout">Logout</a>
+                                </li>
+                            }
                         </div>
+
                     </div>
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="nav navbar-nav">
@@ -54,7 +59,7 @@
                                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AboutUs">אודות</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Roomspages">חדרים</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="RoomTypes" asp-action="Index">חדרים</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ExstaServices">שירותים נוספים</a>
