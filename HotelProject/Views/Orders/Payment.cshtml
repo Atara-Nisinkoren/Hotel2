@@ -1,4 +1,4 @@
-﻿
+﻿@model HotelProject.Models.Order
 @{
     ViewData["Title"] = "Payment";
 }
@@ -13,6 +13,7 @@
             <p>
                 <label>Ralon hotel <br></label>
                 <label>תאריך הגעה 10/10/10</label>
+
                 <label>20/20/10</label>
                 <label>מספר חדרים</label>
                 <label>מספר לילות</label>
@@ -26,28 +27,29 @@
 
         <div class="col-sm-12 col-xs-12 col-md-5">
             <h1>פרטי האורח</h1>
-            <form>
+            <form method="POST">
                 <ul>
                     <li>
-                        <label>שם פרטי*</label><br>
-                        <input type="text">
+                        <label for="id">תעודת זהות*</label><br>
+                        <input type="text" id="id">
                     </li>
                     <li>
-                        <label>שם משפחה*</label><br>
-                        <input type="text">
+                        <label for="firstName">שם פרטי*</label><br>
+                        <input type="text" id="firstName">
                     </li>
                     <li>
-                        <label>אימייל*</label><br>
-                        <input type="email">
+                        <label for="lastName">שם משפחה*</label><br>
+                        <input type="text" id="lastName">
                     </li>
                     <li>
-                        <label>טלפון*</label><br>
-                        <input type="text">
+                        <label for="mail">אימייל*</label><br>
+                        <input type="email" id="mail">
                     </li>
                     <li>
-                        <label>הערות</label><br>
-                        <input type="text">
+                        <label for="telPhone">טלפון*</label><br>
+                        <input type="text" id="telPhone">
                     </li>
+
                 </ul>
             </form>
         </div>
@@ -57,25 +59,25 @@
             <form>
                 <ul>
                     <li>
-                        <label>מספר כרטיס</label><br>
-                        <input type="text">
+                        <label for="ticketNumber">מספר כרטיס</label><br>
+                        <input type="text" id="ticketNumber">
                     </li>
                     <li>
-                        <label>תוקף כרטיס אשראי</label><br>
-                        <input type="text">
+                        <label for="creditValidity">תוקף כרטיס אשראי</label><br>
+                        <input type="text" id="creditValidity">
                     </li>
                     <li>
-                        <label>3</label>
+                        <label for="cvv">3</label>
                         <label>ספרות אחרונות בגב הכרטיס </label><br>
-                        <input type="text">
+                        <input type="text" id="cvv">
                     </li>
                     <li>
-                        <label>תעודת זהות של בעל הכרטיס</label><br>
-                        <input type="text">
+                        <label for="idCredit">תעודת זהות של בעל הכרטיס</label><br>
+                        <input type="text" id="idCredit">
                     </li>
                     <li>
-                        <label>מספר תשלומים</label><br>
-                        <input type="text">
+                        <label for="numberPayment">מספר תשלומים</label><br>
+                        <input type="text" id="numberPayment">
                     </li>
                     <br>
                     <br>

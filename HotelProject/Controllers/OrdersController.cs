@@ -42,11 +42,16 @@ namespace HotelProject.Controllers
 
             return View(order);
         }
-        public IActionResult Payment()
+        [HttpGet]
+        public IActionResult Payment(Order order)
         {
-            return View();
+            return View(order);
         }
-
+        [HttpPost]
+        public async Task<IActionResult> Payment(Order Order,string id,string firstName,string lastName,string mail,string telPhone,string creditValidity,string cvv,string idCredit,string numberPayment)
+        {
+            return View(Order);
+        }
         // GET: Orders/Create
         public IActionResult Create()
         {
