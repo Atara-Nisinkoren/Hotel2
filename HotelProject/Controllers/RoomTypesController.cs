@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HotelProject.Data;
 using HotelProject.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace HotelProject.Controllers
 {
@@ -46,6 +47,10 @@ namespace HotelProject.Controllers
         // GET: RoomTypes/Create
         public IActionResult Create()
         {
+            if (HttpContext.Session.GetString("Name") == null)
+            {
+                return RedirectToAction("Login", "Workers");
+            }
             return View();
         }
 
@@ -77,6 +82,10 @@ namespace HotelProject.Controllers
             if (roomType == null)
             {
                 return NotFound();
+            }
+            if (HttpContext.Session.GetString("Name") == null)
+            {
+                return RedirectToAction("Login", "Workers");
             }
             return View(roomType);
         }
@@ -130,7 +139,10 @@ namespace HotelProject.Controllers
             {
                 return NotFound();
             }
-
+            if (HttpContext.Session.GetString("Name") == null)
+            {
+                return RedirectToAction("Login", "Workers");
+            }
             return View(roomType);
         }
 
@@ -142,6 +154,10 @@ namespace HotelProject.Controllers
             var roomType = await _context.RoomType.FindAsync(id);
             _context.RoomType.Remove(roomType);
             await _context.SaveChangesAsync();
+            if (HttpContext.Session.GetString("Name") == null)
+            {
+                return RedirectToAction("Login", "Workers");
+            }
             return RedirectToAction(nameof(Index));
         }
 
