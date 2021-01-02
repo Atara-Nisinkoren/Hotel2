@@ -79,11 +79,11 @@ namespace HotelProject.Controllers
             ViewBag.NoRoomFound = "Sorry, there are no avaliable rooms for the dates specified.";
             return View("Index");
         }
-        [HttpPost]
-        public IActionResult Search()
-        {
-            RedirectToAction("","",);
-        }
+        //[HttpPost]
+        //public IActionResult Search()
+        //{
+        //    RedirectToAction("","",);
+        //}
         public IActionResult Privacy()
         {
             return View();
