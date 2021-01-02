@@ -2,88 +2,127 @@
 @{
     ViewData["Title"] = "Payment";
 }
-
+@if(ViewBag.OrderFailed!=null)
+{
+    <p>ViewBag.OrderFailed</p>
+}
 
 
 <div class="container">
     <div class="row">
-
         <div class="col-sm-12 col-xs-12 col-md-2">
             <h1> פרטי ההזמנה</h1>
             <p>
                 <label>Ralon hotel <br></label>
-                <label>תאריך הגעה 10/10/10</label>
+                <label>תאריך הגעה:</label>
+                <label>@Model.FromDate</label>
+                <label>תאריך עזיבה:</label>
+                <label>@Model.ToDate</label>
+                <label> @Model.NumOfAdults מבוגרים </label>
+                @if (Model.NumOfKids > 0)
+                {
+                    <label> @Model.NumOfKids ילדים </label>
+                }
+                @if (Model.NumOfInfants > 0)
+                {
+                    <label> @Model.NumOfInfants תינוקות </label>
+                }
+                @if (Model.Rooms != null)
+                {
+                    <label>מס' חדרים:@Model.Rooms.Count </label>
+                    @foreach (var room in Model.Rooms)
+                    {
+                    <p>@room.Room.Type.Name</p>
+                    <p>@room.Room.Type.Desc</p>
+                }
+                }
+                <br>
+                <label>מחיר: @Model.TotalPrice ₪ </label>
+                </p>
+            </div>
 
-                <label>20/20/10</label>
-                <label>מספר חדרים</label>
-                <label>מספר לילות</label>
-                <label>חדר 23</label>
-                <label>2 מבוגרים</label>
-                <label>סוויטת דלקס עם נוף מלא לים</label>
-                <label>לינה וארוחת בוקר</label>
-                <label>מחיר: 1,377 ₪</label>
-            </p>
-        </div>
+        <div class="col-sm-12 col-xs-12 col-md-10">
+            <form asp-controller="Orders" asp-action="Payment">
+                <div class="row">
+                    <div class="col-sm-10 col-xs-10 col-md-5">
+                        <h1>פרטי האורח</h1>
+                        <ul>
+                            <li>
+                                <label>תעודת זהות*</label><br>
+                                <input type="text" name="ID">
+                            </li>
+                            <li>
+                                <label> שם מלא*</label><br>
+                                <input type="text" name="Name">
+                            </li>
+                            <li>
+                                <label>אימייל*</label><br>
+                                <input type="email" name="Email">
+                            </li>
+                            <li>
+                                <label>טלפון*</label><br>
+                                <input type="text" name="PhoneNumber">
+                            </li>
+                            <li>
+                                <label>כתובת*</label><br>
+                                <input type="text" name="Address">
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-10 col-xs-10 col-md-5">
+                        <h1>פרטי תשלום</h1>
+                        <ul>
+                            <li>
+                                <label>מספר כרטיס</label><br>
+                                <input type="text" name="ticketNumber">
+                            </li>
+                            <li>
+                                <label>תוקף כרטיס אשראי</label><br>
+                                @*<input type="text" name="creditValidity">*@
+                                <select name="expiryYear">
+                                    <option value="21">2021</option>
+                                    <option value="22">2022</option>
+                                    <option value="23">2023</option>
+                                    <option value="24">2024</option>
+                                    <option value="25">2025</option>
+                                </select>
+                                <label>/</label>
+                                <select name="expiryMonth">
+                                    <option value="01">1</option>
+                                    <option value="02">2 </option>
+                                    <option value="03">3</option>
+                                    <option value="04">4</option>
+                                    <option value="05">5</option>
+                                    <option value="06">6</option>
+                                    <option value="07">7</option>
+                                    <option value="08">8</option>
+                                    <option value="09">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                </select>
 
-        <div class="col-sm-12 col-xs-12 col-md-5">
-            <h1>פרטי האורח</h1>
-            <form method="POST">
-                <ul>
-                    <li>
-                        <label for="id">תעודת זהות*</label><br>
-                        <input type="text" id="id">
-                    </li>
-                    <li>
-                        <label for="firstName">שם פרטי*</label><br>
-                        <input type="text" id="firstName">
-                    </li>
-                    <li>
-                        <label for="lastName">שם משפחה*</label><br>
-                        <input type="text" id="lastName">
-                    </li>
-                    <li>
-                        <label for="mail">אימייל*</label><br>
-                        <input type="email" id="mail">
-                    </li>
-                    <li>
-                        <label for="telPhone">טלפון*</label><br>
-                        <input type="text" id="telPhone">
-                    </li>
+                            </li>
+                            <li>
+                                <label>3 ספרות אחרונות בגב הכרטיס</label><br>
+                                <input type="text" name="cvv">
+                            </li>
+                            <li>
+                                <label>תעודת זהות של בעל הכרטיס</label><br>
+                                <input type="text" name="idCredit">
+                            </li>
+                            <li>
+                                <label>מספר תשלומים</label><br>
+                                <input type="text" name="numberOfPayment">
+                            </li>
+                            <br>
+                            <br>
+                        </ul>
+                        <button id="btn_invite" type="submit" class="btn btn-outline-warning">הזמן</button>
 
-                </ul>
+                    </div>
+                </div>
             </form>
-        </div>
-
-        <div class="col-sm-12 col-xs-12 col-md-5">
-            <h1>פרטי תשלום</h1>
-            <form>
-                <ul>
-                    <li>
-                        <label for="ticketNumber">מספר כרטיס</label><br>
-                        <input type="text" id="ticketNumber">
-                    </li>
-                    <li>
-                        <label for="creditValidity">תוקף כרטיס אשראי</label><br>
-                        <input type="text" id="creditValidity">
-                    </li>
-                    <li>
-                        <label for="cvv">3</label>
-                        <label>ספרות אחרונות בגב הכרטיס </label><br>
-                        <input type="text" id="cvv">
-                    </li>
-                    <li>
-                        <label for="idCredit">תעודת זהות של בעל הכרטיס</label><br>
-                        <input type="text" id="idCredit">
-                    </li>
-                    <li>
-                        <label for="numberPayment">מספר תשלומים</label><br>
-                        <input type="text" id="numberPayment">
-                    </li>
-                    <br>
-                    <br>
-                </ul>
-            </form>
-            <button id="btn_invite" type="button" class="btn btn-outline-warning">הזמן</button>
         </div>
 
     </div>
