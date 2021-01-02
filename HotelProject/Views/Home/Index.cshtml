@@ -1,8 +1,84 @@
-﻿@{
+﻿@model HotelProject.Models.Order
+@{
     ViewData["Title"] = "Home Page";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<link href="~/css/searchEngine.css" rel="stylesheet" />
+<div class="container-fluid container-sm" style="direction: rtl;">
+    <form class="form-inline searchEngine" asp-action="Search">
+        <div>
+            <label asp-for="FromDate">תאריך הגעה</label>
+            <input asp-for="FromDate" id="FromDate" type="date" class="form-control mb-2 mr-sm-2" placeholder="תאריך הגעה">
+        </div>
+        <div>
+            <label asp-for="ToDate">תאריך עזיבה</label>
+            <input asp-for="ToDate" id="ToDate" type="date" class="form-control mb-2 mr-sm-2" placeholder="תאריך עזיבה">
+        </div>
+        <div>
+            <label asp-for="NumOfAdults">מספר מבוגרים</label>
+            <div class="form-control">
+                <div class="value-button" id="increase1" onclick="increaseValue(1)" value="Increase Value">+</div>
+                <input asp-for="NumOfAdults" type="number" class="number" id="number1" value="0" />
+                <div class="value-button" id="decrease1" onclick="decreaseValue(1)" value="Decrease Value">-</div>
+            </div>
+        </div>
+        <div>
+            <label asp-for="NumOfKids">מספר ילדים</label>
+            <div>
+                <div class="value-button" id="increase2" onclick="increaseValue(2)" value="Increase Value">+</div>
+                <input asp-for="NumOfKids" type="number" class="number" id="number2" value="0" />
+                <div class="value-button" id="decrease2" onclick="decreaseValue(2)" value="Decrease Value">-</div>
+            </div>
+        </div>
+        <div>
+            <label asp-for="NumOfInfants">מספר תינוקות</label>
+            <div>
+                <div class="value-button" id="increase3" onclick="increaseValue(3)" value="Increase Value">+</div>
+                <input asp-for="NumOfInfants" type="number" class="number" id="number3" value="0" />
+                <div class="value-button" id="decrease3" onclick="decreaseValue(3)" value="Decrease Value">-</div>
+            </div>
+        </div>
+        @*<div class="dropdown mb-2 mr-sm-2">
+                <label for="numOfPeople">מספר אנשים</label>
+                <input id="numOfPeople" type="text" class="form-control  dropdown-toggle" data-toggle="dropdown"
+                       placeholder=" מבוגר 1">
+                <div class="dropdown-menu">
+                    <div class="dropdown-item" href="#">
+                        מבוגרים  <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
+                        <input type="number" id="number" value="0" />
+                        <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
+                    </div>
+                    <div class="dropdown-item" href="#">
+                        ילדים  <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
+                        <input type="number" id="number" value="0" />
+                        <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
+                    </div>
+                    <div class="dropdown-item" href="#">
+                        תינוקות  <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
+                        <input type="number" id="number" value="0" />
+                        <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
+                    </div>
+                </div>
+            </div>*@
+        <button id="serachBtn" type="submit" class="btn btn-outline-warning mb-2 mr-sm-2">חפש</button>
+    </form>
+    @if (ViewBag.NoRoomFound != null)
+    {
+        <p>@ViewBag.NoRoomFound</p>
+    }
 </div>
+<script>
+    function increaseValue(id) {
+        var value = parseInt(document.getElementById('number' + id).value, 10);
+        value = isNaN(value) ? 0 : value;
+        value++;
+        document.getElementById('number' + id).value = value;
+    }
+
+    function decreaseValue(id) {
+        var value = parseInt(document.getElementById('number' + id).value, 10);
+        value = isNaN(value) ? 0 : value;
+        value < 1 ? value = 1 : '';
+        value--;
+        document.getElementById('number' + id).value = value;
+    }
+</script>
