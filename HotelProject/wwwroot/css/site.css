@@ -70,6 +70,7 @@ body {
   line-height: 18px; /* Vertically center the text there */
 }
 
-.hebrew{
+.hebrew {
+    float: right;
     direction: rtl;
 }
