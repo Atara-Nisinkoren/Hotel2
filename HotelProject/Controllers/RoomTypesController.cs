@@ -14,7 +14,6 @@ namespace HotelProject.Controllers
     public class RoomTypesController : Controller
     {
         private readonly HotelProjectContext _context;
-        List<String> listImages;
 
         public RoomTypesController(HotelProjectContext context)
         {
@@ -41,6 +40,10 @@ namespace HotelProject.Controllers
             {
                 return NotFound();
             }
+            ViewBag.TotalBads = roomType.ExtraBeds + 2;
+            int view = roomType.View;
+            ViewBag.View = Enum.GetName(typeof(ViewEnum), roomType.View);
+            ViewBag.Balcony = roomType.IsBalcony ? "יש" : "אין";
             //listImages =roomType.ImgUrl.Split(',').ToList();
             return View(roomType);
         }
