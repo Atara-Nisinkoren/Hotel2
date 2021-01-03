@@ -15,7 +15,7 @@
         </div>
         <div>
             <label asp-for="NumOfAdults">מספר מבוגרים</label>
-            <div class="form-control">
+            <div>
                 <div class="value-button" id="increase1" onclick="increaseValue(1)" value="Increase Value">+</div>
                 <input asp-for="NumOfAdults" type="number" class="number" id="number1" value="0" />
                 <div class="value-button" id="decrease1" onclick="decreaseValue(1)" value="Decrease Value">-</div>
@@ -61,6 +61,7 @@
             </div>*@
         <button id="serachBtn" type="submit" class="btn btn-outline-warning mb-2 mr-sm-2">חפש</button>
     </form>
+    @Html.Partial("_slideshow")
     @if (ViewBag.NoRoomFound != null)
     {
         <p>@ViewBag.NoRoomFound</p>
@@ -82,3 +83,10 @@
         document.getElementById('number' + id).value = value;
     }
 </script>
+
+@section Css{
+    <link rel="stylesheet" href="~/css/slideshow.css" />
+}
+@section Js{
+    <script src="~/js/slideshow.js"></script>
+}

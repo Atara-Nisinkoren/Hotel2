@@ -3,27 +3,34 @@
 @{
     ViewData["Title"] = "SearchResults";
 }
+<form asp-action="RedirectToPayment">
+    @foreach (var room in Model)
+    {
+        <input type="text" name="FromDate" value="@ViewBag.newOrder.FromDate" />
+        <input type="text" name="ToDate" value="@ViewBag.newOrder.ToDate" />
+        <input type="text" name="NumOfAdults" value="@ViewBag.newOrder.NumOfAdults" />
+        <input type="text" name="NumOfKids" value="@ViewBag.newOrder.NumOfKids" />
+        <input type="text" name="NumOfInfants" value="@ViewBag.newOrder.NumOfInfants" />
 
-@foreach (var room in Model)
-{
-    <div class="card mb-3 mbb">
-        <div class="row no-gutters">
-            <div class="col-md-6">
-                <img src="@room.ImgUrl" class="card-img" alt="...">
-            </div>
-            <div class="col-md-6">
-                <div class="card-body">
-                    <h5 class="card-title right">@room.Name</h5>
-                    <p class="card-text right fsize">
-                        @room.Desc
-                    </p>
-                    <button asp-action="Search" type="submit" class="btn btn-outline-warning" >
-                        הזמן
-                        עכשיו
-                    </button>
+        <div class="card mb-3 mbb">
+            <div class="row no-gutters">
+                <div class="col-md-6">
+                    <img src="../@room.ImgUrl" class="card-img" alt="...">
+                </div>
+                <div class="col-md-6">
+                    <div class="card-body">
+                        <h5 class="card-title right">@room.Name</h5>
+                        <p class="card-text right fsize">
+                            @room.Desc
+                        </p>
+                        <a asp-controller="Home" asp-action="RedirectToPayment" asp-route-id="@room.Id" type="submit" class="btn btn-outline-warning">
+                            הזמן
+                            עכשיו
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-}
+    }
+</form>
 

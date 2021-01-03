@@ -1,29 +1,31 @@
 var slideIndex = 1;
-showSlides(slideIndex);
+showSlides();
 
-/*function showSlides() {
+function showSlides() {
   var i;
   var slides = document.getElementsByClassName("mySlides");
   for (i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";
   }
   slideIndex++;
-  if (slideIndex > slides.length) {slideIndex = 1}
-  slides[slideIndex-1].style.display = "block";
-  setTimeout(showSlides, 2000); // Change image every 2 seconds
-}*/
+    if (slideIndex > slides.length) { slideIndex = 1 }
+    if (slides.length > 0) {
+        slides[slideIndex - 1].style.display = "block";
+    }
+  setTimeout(showSlides, 1000); // Change image every 2 seconds
+}
 
 // Next/previous controls
 function plusSlides(n) {
-  showSlides(slideIndex += n);
+    showSlide(slideIndex += n);
 }
 
 // Thumbnail image controls
 function currentSlide(n) {
-  showSlides(slideIndex = n);
+    showSlide(slideIndex = n);
 }
 
-function showSlides(n) {
+function showSlide(n) {
   var i;
   var slides = document.getElementsByClassName("mySlides");
   var dots = document.getElementsByClassName("dot");
@@ -34,7 +36,9 @@ function showSlides(n) {
   }
   for (i = 0; i < dots.length; i++) {
       dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " active";
+    }
+    if (slides.length > 0) {
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+    }
 }

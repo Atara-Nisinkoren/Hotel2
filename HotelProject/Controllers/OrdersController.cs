@@ -57,7 +57,7 @@ namespace HotelProject.Controllers
                                                 //string ID, string Name, string PhoneNumber, string Address, string Email
                                                 //payment's details
                                                 //string creditValidity, 
-                                                string ticketNumber, 
+                                                string cardNumber, 
                                                 string expiryMonth, string expiryYear,
                                                 string cvv, string idCredit, string numberOfPayment
                                                 )
