@@ -15,9 +15,9 @@
             <p>
                 <label>Ralon hotel <br></label>
                 <label>תאריך הגעה:</label>
-                <label>@Model.FromDate.Date</label>
+                <label>@Model.FromDate.ToString("dd/MM/yyyy")</label>
                 <label>תאריך עזיבה:</label>
-                <label>@Model.ToDate.Date</label>
+                <label>@Model.ToDate.ToString("dd/MM/yyyy")</label>
                 <label> @Model.NumOfAdults מבוגרים </label>
                 @if (Model.NumOfKids > 0)
                 {

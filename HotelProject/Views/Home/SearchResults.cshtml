@@ -3,10 +3,14 @@
 @{
     ViewData["Title"] = "SearchResults";
 }
-<form>
+<form asp-action="RedirectToPayment">
     @foreach (var room in Model)
     {
-        @*<input type="hidden" asp-for="@room.Id" />*@
+        <input type="text" name="FromDate" value="@ViewBag.newOrder.FromDate" />
+        <input type="text" name="ToDate" value="@ViewBag.newOrder.ToDate" />
+        <input type="text" name="NumOfAdults" value="@ViewBag.newOrder.NumOfAdults" />
+        <input type="text" name="NumOfKids" value="@ViewBag.newOrder.NumOfKids" />
+        <input type="text" name="NumOfInfants" value="@ViewBag.newOrder.NumOfInfants" />
 
         <div class="card mb-3 mbb">
             <div class="row no-gutters">
@@ -19,10 +23,10 @@
                         <p class="card-text right fsize">
                             @room.Desc
                         </p>
-                        <button asp-controller="Home" asp-action="RedirectToPayment" asp-route-id="@room.Id" type="submit" class="btn btn-outline-warning">
+                        <a asp-controller="Home" asp-action="RedirectToPayment" asp-route-id="@room.Id" type="submit" class="btn btn-outline-warning">
                             הזמן
                             עכשיו
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>

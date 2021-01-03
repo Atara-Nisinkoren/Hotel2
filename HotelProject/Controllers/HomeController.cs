@@ -52,11 +52,15 @@ namespace HotelProject.Controllers
             //    ViewBag.EnterDetails = "You must specify dates and number of people!";
             //    return View("Index");
             //}
-            _fromDate = fromDate;
-            _toDate = toDate;
-            _nunOfAdults = numOfAdults;
-            _nunOfKids = numOfKids;
-            _nunOfInfants = numOfInfants;
+            Order newOrder = new Order()
+            {
+                FromDate = fromDate,
+                ToDate = toDate,
+                NumOfAdults = numOfAdults,
+                NumOfKids = numOfKids,
+                NumOfInfants= numOfInfants,
+            };
+            ViewBag.newOrder = newOrder;
             IEnumerable<Room> avaliableRooms = new List<Room>();
             IEnumerable<RoomType> avaliableRoomsTypes = new List<RoomType>();
             List<int> notAvaliableRoomsIds = new List<int>();
@@ -90,22 +94,23 @@ namespace HotelProject.Controllers
             ViewBag.NoRoomFound = "Sorry, there are no avaliable rooms for the dates specified.";
             return View("Index");
         }
-        public IActionResult RedirectToPayment(int typeId)
+
+        public IActionResult RedirectToPayment(int id,Order order)
         {
-            var chosenTypeRoom = _context.RoomType.FirstOrDefault(r => r.Id == typeId);
+            var chosenTypeRoom = _context.RoomType.FirstOrDefault(r => r.Id == id);
             var perihod = _toDate - _fromDate;
             if(chosenTypeRoom != null)
             {
                 Order newOrder = new Order()
                 {
-                    FromDate = _fromDate,
-                    ToDate = _toDate,
-                    NumOfAdults = _nunOfAdults,
-                    NumOfKids = _nunOfKids,
-                    NumOfInfants = _nunOfKids,
+                    FromDate = ViewBag.formDate,
+                    ToDate = ViewBag.toDate,
+                    NumOfAdults = ViewBag.numOfAdults,
+                    NumOfKids = ViewBag.numOfKids,
+                    NumOfInfants = ViewBag.numOfKids,
                     TotalPrice = chosenTypeRoom.BasicPrice * perihod.Days + _nunOfKids * 100 * perihod.Days,
 
-            };
+                };
                 return RedirectToAction("Payment", "Orders", newOrder);
             }
             return View("");
