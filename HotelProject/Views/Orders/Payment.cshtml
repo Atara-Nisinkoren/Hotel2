@@ -15,9 +15,9 @@
             <p>
                 <label>Ralon hotel <br></label>
                 <label>תאריך הגעה:</label>
-                <label>@Model.FromDate</label>
+                <label>@Model.FromDate.Date</label>
                 <label>תאריך עזיבה:</label>
-                <label>@Model.ToDate</label>
+                <label>@Model.ToDate.Date</label>
                 <label> @Model.NumOfAdults מבוגרים </label>
                 @if (Model.NumOfKids > 0)
                 {
@@ -74,7 +74,7 @@
                             <ul>
                                 <li>
                                     <label>מספר כרטיס</label><br>
-                                    <input type="text" name="ticketNumber">
+                                    <input type="text" name="cardNumber">
                                 </li>
                                 <li>
                                     <label>תוקף כרטיס אשראי</label><br>
@@ -118,6 +118,12 @@
                                 <br>
                                 <br>
                             </ul>
+                            <input type="hidden" asp-for="NumOfInfants"/>
+                            <input type="hidden" asp-for="NumOfAdults"/>
+                            <input type="hidden" asp-for="NumOfKids"/>
+                            <input type="hidden" asp-for="FromDate"/>
+                            <input type="hidden" asp-for="ToDate"/>
+                            <input type="hidden" asp-for="TotalPrice"/>
                             <button id="btn_invite" type="submit" class="btn btn-outline-warning">הזמן</button>
 
                         </div>

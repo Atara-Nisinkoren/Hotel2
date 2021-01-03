@@ -3,27 +3,30 @@
 @{
     ViewData["Title"] = "SearchResults";
 }
+<form>
+    @foreach (var room in Model)
+    {
+        @*<input type="hidden" asp-for="@room.Id" />*@
 
-@foreach (var room in Model)
-{
-    <div class="card mb-3 mbb">
-        <div class="row no-gutters">
-            <div class="col-md-6">
-                <img src="@room.ImgUrl" class="card-img" alt="...">
-            </div>
-            <div class="col-md-6">
-                <div class="card-body">
-                    <h5 class="card-title right">@room.Name</h5>
-                    <p class="card-text right fsize">
-                        @room.Desc
-                    </p>
-                    <button asp-action="Search" type="submit" class="btn btn-outline-warning" >
-                        הזמן
-                        עכשיו
-                    </button>
+        <div class="card mb-3 mbb">
+            <div class="row no-gutters">
+                <div class="col-md-6">
+                    <img src="../@room.ImgUrl" class="card-img" alt="...">
+                </div>
+                <div class="col-md-6">
+                    <div class="card-body">
+                        <h5 class="card-title right">@room.Name</h5>
+                        <p class="card-text right fsize">
+                            @room.Desc
+                        </p>
+                        <button asp-controller="Home" asp-action="RedirectToPayment" asp-route-id="@room.Id" type="submit" class="btn btn-outline-warning">
+                            הזמן
+                            עכשיו
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-}
+    }
+</form>
 
