@@ -1,0 +1,25 @@
+* {
+    color: rgb(188,148,26);
+}
+.white {
+    color: white;
+}
+.left {
+    margin: 0 auto;
+}
+.right{
+    direction: rtl;
+    text-align: right;
+}
+
+.center {
+    margin: 0 auto;
+    float: none;
+}
+
+  .btn{
+      direction: ltr;
+  }
+  #more{
+      padding-top: 3%;
+  }

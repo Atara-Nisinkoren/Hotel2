@@ -1,24 +1,22 @@
 ﻿
-/** {
+* {
     text-align: center;
     background-color: white;
-}*/
-
-body {
-    background-color: white;
-    margin-top: 20px;
-   /* direction: rtl;*/
-    position: center;
 }
 
-h1 {
+.paymentBody {
+    background-color: white;
+    margin-top: 20px;
+    direction: rtl;
+    position: center;
+    color: rgb(177, 154, 28);
+}
+
+.paymentTitle {
     color: gold;
     text-decoration: underline;
 }
 
-div {
-    color: rgb(177, 154, 28);
-}
 
 .btn {
     padding: 25px;
@@ -41,6 +39,6 @@ div {
     margin-right: 30%;
 }
 
-ul {
+.list {
     list-style: none;
 }

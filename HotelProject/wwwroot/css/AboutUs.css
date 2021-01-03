@@ -1,17 +1,20 @@
-﻿
-body {
-    text-align: center;
-    /* background-color: white;*/
+﻿* {
+    color: rgb(188,148,26);
 }
 
-h1 {
+.aboutBody {
+    text-align: center;
+     /*background-color: white;*/
+}
+
+.aboutTitle {
     color: gold;
     margin-top: 2%;
     margin-bottom: 1%;
 }
 
-p {
+/*.aboutP {
     text-align: right;
     margin-right: 0%;
     direction: rtl;
-}
+}*/

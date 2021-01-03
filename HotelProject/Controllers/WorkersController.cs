@@ -23,10 +23,7 @@ namespace HotelProject.Controllers
         {
 
             HttpContext.Session.Remove("Name");
-            {
-                return RedirectToAction("Index" , "Home");
-            }
-            return View(await _context.Worker.ToListAsync());
+            return RedirectToAction("Index", "Home");
         }
         // GET: Workers
         public async Task<IActionResult> Index()

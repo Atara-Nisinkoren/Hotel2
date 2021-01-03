@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HotelProject.Data;
 using HotelProject.Models;
+using SQLitePCL;
 
 namespace HotelProject.Controllers
 {
@@ -42,16 +43,78 @@ namespace HotelProject.Controllers
 
             return View(order);
         }
+
         [HttpGet]
         public IActionResult Payment(Order order)
         {
             return View(order);
         }
-        //[HttpPost]
-        //public async Task<IActionResult> Payment(Order Order,string id,string firstName,string lastName,string mail,string telPhone,string creditValidity,string cvv,string idCredit,string numberPayment)
+
+        [HttpPost]
+        public async Task<IActionResult> Payment(Order order,
+                                                 //customer's details
+                                                 Client client,
+                                                //string ID, string Name, string PhoneNumber, string Address, string Email
+                                                //payment's details
+                                                //string creditValidity, 
+                                                string cardNumber, 
+                                                string expiryMonth, string expiryYear,
+                                                string cvv, string idCredit, string numberOfPayment
+                                                )
+        {
+            //check if client did order in the past.
+            var existsClient = await _context.Client.FindAsync(client.ID);
+            //if is new client, add him to the system.
+            if (existsClient == null)
+            {
+                _context.Client.Add(client);
+                _context.SaveChanges();
+            }
+            bool success = true;//should use payment paramters for perform payment. now ignore it.
+            if (success)
+            {
+                //enter thr order to DB
+                order.Client = client;
+                _context.Order.Add(order);
+                _context.SaveChanges();
+                ViewBag.OrderDone = "(:הזמנתך התקבלה בהצלחה. מחכים לראות אותך";
+                return RedirectToAction("Index", "Home");
+            }
+            else {
+                ViewBag.OrderFailed = "מצטערים הזמנה נכשלה. אנא צרו קשר עם שירות לקוחות";
+            }
+            return View(order);
+        }
+
+
+        //public ActionResult PaymentAction(Order order,
+        //                                 //customer's details
+        //                                 string id, string firstName, string lastName, string mail, string telPhone,
+        //                                 //payment's details
+        //                                 string ticketNumber, string creditValidity, string cvv, string idCredit, string numberPayment)
         //{
-        //    return View(Order);
+        //    //address? orders?
+        //    Client client = new Client { ID = id, Name = firstName + " " + lastName, Email = mail, PhoneNumber = telPhone, };
+        //    //check if client did order in the past.
+        //    var existsClient = await _context.Client.FindAsync(id);
+        //    //if is new client, add him to the system.
+        //    if (existsClient == null)
+        //    {
+
+        //        _context.Add(client);
+        //    }
+        //    bool success = true;//should use payment paramters for perform payment. now ignore it.
+        //    if (success)
+        //    {
+        //        //enter thr order to DB
+        //        order.Client = client;
+        //        _context.Add(order);
+        //    }
+
+        //    return View(order);
         //}
+
+
         // GET: Orders/Create
         public IActionResult Create()
         {
