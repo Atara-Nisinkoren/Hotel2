@@ -7,7 +7,7 @@
     <title>@ViewData["Title"] - HotelProject</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-   <link rel="stylesheet" href="~/css/Layout.css" />
+    <link rel="stylesheet" href="~/css/Layout.css" />
     @RenderSection("Css", required: false)
 
 </head>
@@ -17,27 +17,31 @@
             <div class="container">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarNav">-->
-                        <!-- <span class="icon-bar"></span>-->
-                        <!-- <span class="icon-bar"></span>-->
-                        <!--<span class="icon-bar"></span>-->
-                        <!--  </button>-->
-                        <div style="display: flex; direction: rtl; align-items: center; float: left;">
-                            <div class="flag">
-                                <img width="26px" src="~/img/english.png" alt="logo">
-                                <span>EN</span>
-                            </div>
-                            <div class="logo"> <img width="70px" src="~/img/logo.JPG" alt="logo"></div>
-                            @if (Context.Session.GetString("Name") != null)
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Workers" asp-action="Index"> Login</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Workers" asp-action="Logout">Logout</a>
-                                </li>
-                            }
-                        </div>
+                         @*<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarNav">
+                         <span class="icon-bar"></span>
+                         <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                          </button>*@
+                         <div style="display: flex; direction: rtl; align-items: center; float: left;">
+                             <div class="flag">
+                                 <img width="26px" src="~/img/english.png" alt="logo">
+                                 <span>EN</span>
+                             </div>
+                             <div class="logo"> <img width="70px" src="~/img/logo.JPG" alt="logo"></div>
+
+                             @*<li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Workers" asp-action="Login"> Login</a>
+        </li>*@
+                             @if (Context.Session.GetString("Name") != null)
+                             {
+                                 <li class="nav-item">
+                                     <a class="nav-link text-dark" asp-area="" asp-controller="Workers" asp-action="Logout">Logout</a>
+                                 </li>
+                                 <li class="nav-item">
+                                     Hello, @Context.Session.GetString("Name")
+                                 </li>
+                             }
+                         </div>
 
                     </div>
                     <div class="collapse navbar-collapse" id="navbarNav">
@@ -46,10 +50,10 @@
                                  <a class="nav-link" href="searchEngine.html" target="myFrame">דף הבית </a>
                              </li>
                             <!-- <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">HotelProject</a>-->
-                            <!--button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"-->
-                            <!-- aria-expanded="false" aria-label="Toggle navigation"-->
-                            <!--  <span class="navbar-toggler-icon"></span>-->
-                            <!-- </button>-->
+                            @*button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                             aria-expanded="false" aria-label="Toggle navigation"*@
+                              <span class="navbar-toggler-icon"></span>
+                             </button>
                             <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" id="navbarNav">
                                 <ul class="nav navbar-nav flex-grow-1">
                                     <li class="nav-item">
@@ -69,7 +73,10 @@
                                     </li>
                                 </ul>
                             </div>
+                        </ul>
                     </div>
+                </div>
+            </div>
         </nav>
     </header>
     <div class="container">
@@ -101,6 +108,7 @@
                     <p>&copy Ralon hotel</p>
                 </div>
             </div>
+        </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

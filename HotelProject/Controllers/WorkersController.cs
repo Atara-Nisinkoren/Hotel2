@@ -78,14 +78,14 @@ namespace HotelProject.Controllers
 
             if (q.Count() > 0)
             {
-                HttpContext.Session.SetString("Name", q.First().Name);
-                return RedirectToAction("Create", "RoomTypes");
-                return RedirectToAction("Delete", "RoomTypes");
-                return RedirectToAction("Edit", "RoomTypes");
-                return RedirectToAction("Create", "Rooms");
-                return RedirectToAction("Delete", "Rooms");
-                return RedirectToAction("Edit", "RoomTypes");
-                //return RedirectToAction(nameof(Index));
+
+                if (worker.WorkerType == 1 || worker.WorkerType == 2)
+                { 
+                   HttpContext.Session.SetString("Name", q.First().Name);
+                    return RedirectToAction("Create", "RoomTypes");
+                }
+                else
+                    ViewData["Error1"] = "You do not have permission to  modifying and editing data in the website";
             }
             else
             {
