@@ -18,6 +18,7 @@ namespace HotelProject.Controllers
         private static Order newOrder;
         private static IEnumerable<Room> avaliableRooms;
         private static int numRooms;
+        private static Dictionary<int, double> roomTypeTotal;
 
         public HomeController(ILogger<HomeController> logger, HotelProjectContext context)
         {
@@ -138,7 +139,7 @@ namespace HotelProject.Controllers
         {
             Dictionary<RoomType, int> OrderOptionsResult = new Dictionary<RoomType, int>();
             int numBadsForRoom, kidsForRoom, numOfnights;
-            double priceForKid, priceFor1Adult, totalPrice;
+            double totalPrice, priceForKid, priceFor1Adult;
             //int numOfPeople = numOfAdults + numOfKids;
             foreach (var roomType in roomTypes)
             {
@@ -162,7 +163,9 @@ namespace HotelProject.Controllers
                             totalPrice += newOrder.NumOfInfants * 40;
                             totalPrice *= numOfnights;
                             roomType.Key.BasicPrice = totalPrice;
-                            newOrder.TotalPrice = totalPrice;
+                            if (roomTypeTotal == null)
+                                roomTypeTotal = new Dictionary<int, double>();
+                            roomTypeTotal.Add(roomType.Key.Id, totalPrice);
                             OrderOptionsResult.Add(roomType.Key, numRooms);
                         }
                     }
@@ -192,7 +195,9 @@ namespace HotelProject.Controllers
                             totalPrice += newOrder.NumOfInfants * 40;
                             totalPrice *= numOfnights;
                             roomType.Key.BasicPrice = totalPrice;
-                            newOrder.TotalPrice = totalPrice;
+                            if (roomTypeTotal == null)
+                                roomTypeTotal = new Dictionary<int, double>();
+                            roomTypeTotal.Add(roomType.Key.Id, totalPrice);
                             OrderOptionsResult.Add(roomType.Key, numRooms);
                         }
                     }
@@ -210,7 +215,9 @@ namespace HotelProject.Controllers
                         totalPrice += newOrder.NumOfInfants * 40; 
                         totalPrice *= numOfnights;
                         roomType.Key.BasicPrice = totalPrice;
-                        newOrder.TotalPrice = totalPrice;
+                        if (roomTypeTotal == null)
+                            roomTypeTotal = new Dictionary<int, double>();
+                            roomTypeTotal.Add(roomType.Key.Id, totalPrice);
                         OrderOptionsResult.Add(roomType.Key, numRooms);
                     }
 
@@ -221,7 +228,7 @@ namespace HotelProject.Controllers
 
         public IActionResult RedirectToPayment(int id, Order order)
         {
-            var chosenTypeRoom = _context.RoomType.FirstOrDefault(r => r.Id == id);
+            var chosenTypeRoom = _context.RoomType.FirstOrDefault(r => r.Id == id); //OrderOptionsResult.Keys.FirstOrDefault(rt => rt.Id == id);
             if (chosenTypeRoom != null)
             {
                 var TypeAvaliableRooms = avaliableRooms.Where(r => chosenTypeRoom.Id == r.Type.Id).ToList();
@@ -231,14 +238,15 @@ namespace HotelProject.Controllers
                     for (int i = 0; i < numRooms; i++)
                     {
                         RoomsOrders ro = new RoomsOrders();
-                        ro.OrderId = order.Id;
+                        ro.OrderId = newOrder.Id;
                         ro.RoomId = TypeAvaliableRooms[i].Id;
-                        ro.Order = order;
+                        ro.Order = newOrder;
                         ro.Room = TypeAvaliableRooms[i];
                         if(newOrder.Rooms == null)
                             newOrder.Rooms = new List<RoomsOrders>();
                         newOrder.Rooms.Add(ro);
                     }
+                    newOrder.TotalPrice = roomTypeTotal[chosenTypeRoom.Id];
                     return RedirectToAction("Payment", "Orders", newOrder);
                 }
             }
