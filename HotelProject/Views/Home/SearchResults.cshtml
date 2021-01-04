@@ -6,7 +6,7 @@
 <form asp-action="RedirectToPayment">
     @foreach (var room in Model)
     {
-      
+
         <div class="card mb-3 mbb">
             <div class="row no-gutters">
                 <div class="col-md-6">
@@ -18,6 +18,23 @@
                         <p class="card-text right fsize">
                             @room.Key.Desc
                         </p>
+                        <div id="moreDetailes">
+                            <hr />
+                            <dl class="row hebrew">
+                                <dt class="col-sm-6 white">
+                                    מספר חדרים להזמנה:
+                                </dt>
+                                <dd class="col-sm-2 white">
+                                    @room.Value
+                                </dd>
+                                <dt class="col-sm-6 white">
+                                    מחיר כולל:
+                                </dt>
+                                <dd class="col-sm-2 white">
+                                    @room.Key.BasicPrice
+                                </dd>
+                            </dl>
+                        </div>
                         <a asp-controller="Home" asp-action="RedirectToPayment" asp-route-id="@room.Key.Id" type="submit" class="btn btn-outline-warning">
                             הזמן
                             עכשיו
@@ -29,3 +46,6 @@
     }
 </form>
 
+@section Css{
+    <link rel="stylesheet" href="~/css/searchResults.css" />
+}
