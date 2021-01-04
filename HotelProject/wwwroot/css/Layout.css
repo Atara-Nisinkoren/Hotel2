@@ -18,9 +18,9 @@
     }
 
         .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > li > a:focus,
-        .navbar-inverse .navbar-nav > li > a:hover {
+        .navbar-nav > li > a:hover {
             text-decoration: underline;
-            color: rgb(188,148,26);
+            color: rgb(188,148,26) !important;
         }
 
     .navbar-inverse .navbar-toggle {
