@@ -62,8 +62,9 @@ namespace HotelProject.Controllers
                                                 string cvv, string idCredit, string numberOfPayment
                                                 )
         {
+            order.Id = 0;
             //check if client did order in the past.
-            var existsClient = await _context.Client.FindAsync(client.ID);
+            var existsClient = _context.Client.FirstOrDefault(c => c.ID == client.ID);
             //if is new client, add him to the system.
             if (existsClient == null)
             {
