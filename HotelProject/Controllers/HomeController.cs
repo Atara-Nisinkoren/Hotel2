@@ -235,16 +235,19 @@ namespace HotelProject.Controllers
 
                 if (TypeAvaliableRooms != null)
                 {
+                    HttpContext.Session.SetInt32("numRooms", numRooms);
                     for (int i = 0; i < numRooms; i++)
                     {
-                        RoomsOrders ro = new RoomsOrders();
-                        ro.OrderId = newOrder.Id;
-                        ro.RoomId = TypeAvaliableRooms[i].Id;
-                        ro.Order = newOrder;
-                        ro.Room = TypeAvaliableRooms[i];
-                        if(newOrder.Rooms == null)
-                            newOrder.Rooms = new List<RoomsOrders>();
-                        newOrder.Rooms.Add(ro);
+                        HttpContext.Session.SetInt32("room"+i, TypeAvaliableRooms[i].Id);
+                        //RoomsOrders ro = new RoomsOrders();
+                        //newOrder.Id = 999999;
+                        //ro.OrderId = newOrder.Id;
+                        //ro.RoomId = TypeAvaliableRooms[i].Id;
+                        //ro.Order = newOrder;
+                        //ro.Room = TypeAvaliableRooms[i];
+                        //if (newOrder.Rooms == null)
+                        //    newOrder.Rooms = new List<RoomsOrders>();
+                        //newOrder.Rooms.Add(ro);
                     }
                     newOrder.TotalPrice = roomTypeTotal[chosenTypeRoom.Id];
                     return RedirectToAction("Payment", "Orders", newOrder);

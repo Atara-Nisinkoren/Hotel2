@@ -29,12 +29,12 @@
                 }
                 @if (Model.Rooms != null)
                 {
-                    <label>מס' חדרים:@Model.Rooms.Count </label>
-                    @foreach (var room in Model.Rooms)
+                    <label>מס' חדרים: @Model.Rooms.Count </label>
+                    @*@foreach (var room in Model.Rooms)
                     {
                     <p>@room.Room.Type.Name</p>
                     <p>@room.Room.Type.Desc</p>
-                }
+                    }*@
                 }
                 <br>
                 <label>מחיר: @Model.TotalPrice ₪ </label>

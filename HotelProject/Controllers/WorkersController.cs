@@ -72,13 +72,14 @@ namespace HotelProject.Controllers
                     where worker.Name == a.Name &&
                           worker.WorkerId == a.WorkerId
                     select a;
-
+            //var w = _context.Worker.FirstOrDefault(r=>r.Name==worker.Name&&r.WorkerId==worker.WorkerId)
             if (q.Count() > 0)
             {
 
-                if (worker.WorkerType == 1 || worker.WorkerType == 2)
+                if (q.FirstOrDefault().WorkerType == 1 || q.FirstOrDefault().WorkerType == 2)
                 { 
                    HttpContext.Session.SetString("Name", q.First().Name);
+                    HttpContext.Session.SetInt32("Id", q.First().Id);
                     return RedirectToAction("Create", "RoomTypes");
                 }
                 else

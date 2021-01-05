@@ -5,8 +5,6 @@
 }
 
 <h1>Edit</h1>
-
-<h4>Worker</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -35,8 +33,15 @@
             </div>
             <div class="form-group">
                 <label asp-for="WorkerType" class="control-label"></label>
-                <input asp-for="WorkerType" class="form-control" />
-                <span asp-validation-for="WorkerType" class="text-danger"></span>
+                <select asp-for="WorkerType">
+                    <option value="0">בחר</option>
+                    <option value="1">מנהל</option>
+                    <option value="2">עובד משרד</option>
+                    <option value="3">עובד נקיון</option>
+                    <option value="4">עובד מטבח</option>
+                </select>
+                @*<input asp-for="WorkerType" class="form-control" />
+        <span asp-validation-for="WorkerType" class="text-danger"></span>*@
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
@@ -46,8 +51,12 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Login </a>
 </div>
+
+@section Css{
+    <link rel="stylesheet" href="~/css/Workers.css" />
+}
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
