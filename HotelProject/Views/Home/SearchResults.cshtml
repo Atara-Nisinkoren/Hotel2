@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HotelProject.Models.RoomType>
+﻿@model Dictionary<HotelProject.Models.RoomType, int>
 
 @{
     ViewData["Title"] = "SearchResults";
@@ -6,24 +6,36 @@
 <form asp-action="RedirectToPayment">
     @foreach (var room in Model)
     {
-        <input type="text" name="FromDate" value="@ViewBag.newOrder.FromDate" />
-        <input type="text" name="ToDate" value="@ViewBag.newOrder.ToDate" />
-        <input type="text" name="NumOfAdults" value="@ViewBag.newOrder.NumOfAdults" />
-        <input type="text" name="NumOfKids" value="@ViewBag.newOrder.NumOfKids" />
-        <input type="text" name="NumOfInfants" value="@ViewBag.newOrder.NumOfInfants" />
 
         <div class="card mb-3 mbb">
             <div class="row no-gutters">
                 <div class="col-md-6">
-                    <img src="../@room.ImgUrl" class="card-img" alt="...">
+                    <img src="../@room.Key.ImgUrl" class="card-img" alt="...">
                 </div>
                 <div class="col-md-6">
                     <div class="card-body">
-                        <h5 class="card-title right">@room.Name</h5>
+                        <h5 class="card-title right">@room.Key.Name</h5>
                         <p class="card-text right fsize">
-                            @room.Desc
+                            @room.Key.Desc
                         </p>
-                        <a   type="submit" class="btn btn-outline-warning">
+                        <div id="moreDetailes">
+                            <hr />
+                            <dl class="row hebrew">
+                                <dt class="col-sm-6 white">
+                                    מספר חדרים להזמנה:
+                                </dt>
+                                <dd class="col-sm-2 white">
+                                    @room.Value
+                                </dd>
+                                <dt class="col-sm-6 white">
+                                    מחיר כולל:
+                                </dt>
+                                <dd class="col-sm-2 white">
+                                    @room.Key.BasicPrice
+                                </dd>
+                            </dl>
+                        </div>
+                        <a asp-controller="Home" asp-action="RedirectToPayment" asp-route-id="@room.Key.Id" type="submit" class="btn btn-outline-warning">
                             הזמן
                             עכשיו
                         </a>
@@ -34,3 +46,6 @@
     }
 </form>
 
+@section Css{
+    <link rel="stylesheet" href="~/css/searchResults.css" />
+}

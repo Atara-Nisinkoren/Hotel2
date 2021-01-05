@@ -24,6 +24,10 @@
             <div class="form-group">
                 <input type="submit" value="Login" class="btn btn-primary" />
             </div>
+            @if (ViewData["Error1"] != null)
+            {
+                <div style="color:red; font-weight:bold">@ViewData["Error1"]</div>
+            }
             @if (ViewData["Error"] != null)
             {
                 <div style="color:red; font-weight:bold">@ViewData["Error"]</div>
@@ -33,8 +37,12 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Create">להרשמה לחץ כאן</a>
 </div>
+
+@section Css{
+    <link rel="stylesheet" href="~/css/Workers.css" />
+}  
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

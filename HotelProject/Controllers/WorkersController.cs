@@ -72,17 +72,18 @@ namespace HotelProject.Controllers
                     where worker.Name == a.Name &&
                           worker.WorkerId == a.WorkerId
                     select a;
-
+            //var w = _context.Worker.FirstOrDefault(r=>r.Name==worker.Name&&r.WorkerId==worker.WorkerId)
             if (q.Count() > 0)
             {
-                HttpContext.Session.SetString("Name", q.First().Name);
-                return RedirectToAction("Create", "RoomTypes");
-                return RedirectToAction("Delete", "RoomTypes");
-                return RedirectToAction("Edit", "RoomTypes");
-                return RedirectToAction("Create", "Rooms");
-                return RedirectToAction("Delete", "Rooms");
-                return RedirectToAction("Edit", "RoomTypes");
-                //return RedirectToAction(nameof(Index));
+
+                if (q.FirstOrDefault().WorkerType == 1 || q.FirstOrDefault().WorkerType == 2)
+                { 
+                   HttpContext.Session.SetString("Name", q.First().Name);
+                    HttpContext.Session.SetInt32("Id", q.First().Id);
+                    return RedirectToAction("Create", "RoomTypes");
+                }
+                else
+                    ViewData["Error1"] = "You do not have permission to  modifying and editing data in the website";
             }
             else
             {

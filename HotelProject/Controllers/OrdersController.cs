@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using HotelProject.Data;
 using HotelProject.Models;
 using SQLitePCL;
+using Microsoft.AspNetCore.Http;
 
 namespace HotelProject.Controllers
 {
@@ -47,6 +48,16 @@ namespace HotelProject.Controllers
         [HttpGet]
         public IActionResult Payment(Order order)
         {
+            //List<int> rooms = HttpContext.Session.Get("rooms").Select(x => (int)x).ToList();
+            RoomsOrders room = new RoomsOrders();
+
+            for (int i = 0; i < HttpContext.Session.GetInt32("numRooms"); i++)
+            {
+                room.RoomId = Convert.ToInt32(HttpContext.Session.GetInt32("room" + i));
+                if(order.Rooms == null)
+                    order.Rooms = new List<RoomsOrders>();
+                order.Rooms.Add(room);
+            }
             return View(order);
         }
 
@@ -62,8 +73,9 @@ namespace HotelProject.Controllers
                                                 string cvv, string idCredit, string numberOfPayment
                                                 )
         {
+            order.Id = 0;
             //check if client did order in the past.
-            var existsClient = await _context.Client.FindAsync(client.ID);
+            var existsClient = _context.Client.FirstOrDefault(c => c.ID == client.ID);
             //if is new client, add him to the system.
             if (existsClient == null)
             {
@@ -73,10 +85,24 @@ namespace HotelProject.Controllers
             bool success = true;//should use payment paramters for perform payment. now ignore it.
             if (success)
             {
+
                 //enter thr order to DB
                 order.Client = client;
                 _context.Order.Add(order);
                 _context.SaveChanges();
+                RoomsOrders roomOr = new RoomsOrders();
+
+                for (int i = 0; i < HttpContext.Session.GetInt32("numRooms"); i++)
+                {
+                    roomOr.RoomId = Convert.ToInt32(HttpContext.Session.GetInt32("room" + i));
+                    roomOr.OrderId = order.Id;
+                    roomOr.Order = order;
+                    roomOr.Room = _context.Room.FirstOrDefault(r => r.Id == roomOr.RoomId);
+
+                    _context.RoomsOrders.Add(roomOr);
+                    _context.SaveChanges();
+                    //order.Rooms.Add(room);
+                }
                 ViewBag.OrderDone = "(:הזמנתך התקבלה בהצלחה. מחכים לראות אותך";
                 return RedirectToAction("Index", "Home");
             }

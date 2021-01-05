@@ -6,47 +6,56 @@
 
 <h1>טופס הרשמה</h1>
 
-<h4>Worker</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="WorkerId" class="control-label"></label>
+                <label asp-for="WorkerId" class="control-label">תעודת זהות</label>
                 <input asp-for="WorkerId" class="form-control" type="password" />
                 <span asp-validation-for="WorkerId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
+                <label asp-for="Name" class="control-label">שם</label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PhoneNumber" class="control-label"></label>
+                <label asp-for="PhoneNumber" class="control-label">פלאפון</label>
                 <input asp-for="PhoneNumber" class="form-control" />
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
+                <label asp-for="Email" class="control-label">אימייל</label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="WorkerType" class="control-label"></label>
-                <input asp-for="WorkerType" class="form-control" />
+                <label asp-for="WorkerType" class="control-label">תפקיד</label>
+                <select asp-for="WorkerType">
+                    <option value="0">בחר</option>
+                    <option value="1">מנהל</option>
+                    <option value="2">עובד משרד</option>
+                    <option value="3">עובד נקיון</option>
+                    <option value="4">עובד מטבח</option>
+                </select>
+                @*<input asp-for="WorkerType" class="form-control" />*@
                 <span asp-validation-for="WorkerType" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="הרשם" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Login">Login</a>
 </div>
+@section Css{
+    <link rel="stylesheet" href="~/css/Workers.css" />
+}
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

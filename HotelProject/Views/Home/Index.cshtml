@@ -2,6 +2,10 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+@if(ViewBag.OrderDone != null)
+{
+<p>@ViewBag.OrderDone</p>
+}
 <link href="~/css/searchEngine.css" rel="stylesheet" />
 <div class="container-fluid container-sm" style="direction: rtl;">
     <form class="form-inline searchEngine" asp-action="Search">
