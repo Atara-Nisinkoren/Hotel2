@@ -81,13 +81,13 @@ namespace HotelProject.Controllers
             {
                 _context.Client.Add(client);
                 _context.SaveChanges();
+                existsClient = client;
             }
             bool success = true;//should use payment paramters for perform payment. now ignore it.
             if (success)
             {
-
                 //enter thr order to DB
-                order.Client = client;
+                order.Client = existsClient;
                 _context.Order.Add(order);
                 _context.SaveChanges();
                 RoomsOrders roomOr = new RoomsOrders();

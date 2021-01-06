@@ -117,16 +117,16 @@
                                 </li>
                                 <br>
                                 <br>
-                            </ul class="list">
-                            <input type="hidden" asp-for="NumOfInfants"/>
-                            <input type="hidden" asp-for="NumOfAdults"/>
-                            <input type="hidden" asp-for="NumOfKids"/>
-                            <input type="hidden" asp-for="FromDate"/>
-                            <input type="hidden" asp-for="ToDate"/>
-                             <input type="hidden" asp-for="TotalPrice"/>
-                            <button id="btn_invite" type="submit" class="btn btn-outline-warning">הזמן</button>
+                                </ul class="list">
+                                <input type="hidden" asp-for="NumOfInfants"/>
+                                <input type="hidden" asp-for="NumOfAdults"/>
+                                <input type="hidden" asp-for="NumOfKids"/>
+                                <input type="hidden" asp-for="FromDate" value="@Model.FromDate" />
+                                <input type="hidden" asp-for="ToDate"   value="@Model.ToDate"/>
+                                <input type="hidden" asp-for="TotalPrice"/>
+                                <button id="btn_invite" type="submit" class="btn btn-outline-warning">הזמן</button>
 
-                        </div>
+</div>
                     </div>
                 </form>
             </div>
