@@ -50,8 +50,8 @@ namespace HotelProject.Controllers
         {
             //List<int> rooms = HttpContext.Session.Get("rooms").Select(x => (int)x).ToList();
             RoomsOrders room = new RoomsOrders();
-
-            for (int i = 0; i < HttpContext.Session.GetInt32("numRooms"); i++)
+            var namRoomsFromSesion = HttpContext.Session.GetInt32("numRooms");
+            for (int i = 0; i < namRoomsFromSesion; i++)
             {
                 room.RoomId = Convert.ToInt32(HttpContext.Session.GetInt32("room" + i));
                 if(order.Rooms == null)
@@ -91,8 +91,8 @@ namespace HotelProject.Controllers
                 _context.Order.Add(order);
                 _context.SaveChanges();
                 RoomsOrders roomOr = new RoomsOrders();
-
-                for (int i = 0; i < HttpContext.Session.GetInt32("numRooms"); i++)
+                var namRoomsFromSesion = HttpContext.Session.GetInt32("numRooms");
+                for (int i = 0; i < namRoomsFromSesion; i++)
                 {
                     roomOr.RoomId = Convert.ToInt32(HttpContext.Session.GetInt32("room" + i));
                     roomOr.OrderId = order.Id;

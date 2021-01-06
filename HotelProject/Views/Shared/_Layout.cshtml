@@ -34,7 +34,7 @@
                                 @if (Context.Session.GetString("Name") != null)
                                 {
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Workers" asp-action="Edit" asp-route-id="@Context.Session.GetInt32("Id")">שלום @Context.Session.GetString("Name")</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Workers" asp-action="Edit" asp-route-id="@Context.Session.GetInt32("Id")"> @Context.Session.GetString("Name")</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link text-dark" asp-area="" asp-controller="Workers" asp-action="Logout">יציאה</a>
