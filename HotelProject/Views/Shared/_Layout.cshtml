@@ -18,11 +18,11 @@
             <div class="container">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                         @*<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarNav">
-                         <span class="icon-bar"></span>
-                         <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                          </button>*@
+                        @*<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarNav">
+                             <span class="icon-bar"></span>
+                             <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                              </button>*@
                         <div style="display: flex; direction: rtl; align-items: center; float: left;">
                             <div class="flag">
                                 <img width="26px" src="~/img/english.png" alt="logo">
@@ -30,54 +30,55 @@
                             </div>
                             <div class="logo"> <img width="70px" src="~/img/logo.JPG" alt="logo"></div>
 
-
-                            @if (Context.Session.GetString("Name") != null)
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark"  asp-area="" asp-controller="Workers" asp-action="Edit" asp-route-id="@Context.Session.GetInt32("Id")" >@Context.Session.GetString("Name")</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Workers" asp-action="Logout">logout</a>
-                                </li>
-                            }
-                            else
-                            {
-                                <li id="login" class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Workers" asp-action="Login">Login</a>
-                                </li>
-                            }
+                            <ul>
+                                @if (Context.Session.GetString("Name") != null)
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Workers" asp-action="Edit" asp-route-id="@Context.Session.GetInt32("Id")">שלום @Context.Session.GetString("Name")</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Workers" asp-action="Logout">יציאה</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li id="login" class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Workers" asp-action="Login">כניסה</a>
+                                    </li>
+                                }
+                            </ul>
                         </div>
 
                     </div>
                     <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="nav navbar-nav">
-                            <!-- <li class="nav-item">
-                                 <a class="nav-link" href="searchEngine.html" target="myFrame">דף הבית </a>
-                             </li>
-                            <!-- <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">HotelProject</a>-->
-                            @*button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                             aria-expanded="false" aria-label="Toggle navigation"*@
-                              <span class="navbar-toggler-icon"></span>
-                             </button>
-                            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" id="navbarNav">
-                                <ul class="nav navbar-nav flex-grow-1">
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">דף הבית</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AboutUs">אודות</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="RoomTypes" asp-action="Index">חדרים</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ExstaServices">שירותים נוספים</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Events">כנסים ואירועים</a>
-                                    </li>
-                                </ul>
-                            </div>
+                        @*<ul class="nav navbar-nav">*@
+                        <!-- <li class="nav-item">
+                             <a class="nav-link" href="searchEngine.html" target="myFrame">דף הבית </a>
+                         </li>
+                        <!-- <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">HotelProject</a>-->
+                        @*button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation"*@
+                        @*<span class="navbar-toggler-icon"></span>
+                            </button>*@
+                        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" id="navbarNav">
+                            <ul class="nav navbar-nav flex-grow-1">
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">דף הבית</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AboutUs">אודות</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="RoomTypes" asp-action="Index">חדרים</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ExstaServices">שירותים נוספים</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Events">כנסים ואירועים</a>
+                                </li>
+                            </ul>
+                        </div>
                         </ul>
                     </div>
                 </div>

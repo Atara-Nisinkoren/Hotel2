@@ -4,35 +4,36 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>טופס הרשמה</h1>
+
 
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4" style="text-align:center">
+        <h1>טופס הרשמה</h1>
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="WorkerId" class="control-label">תעודת זהות</label>
+                <label asp-for="WorkerId" class="control-label"></label>
                 <input asp-for="WorkerId" class="form-control" type="password" />
                 <span asp-validation-for="WorkerId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label">שם</label>
+                <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PhoneNumber" class="control-label">פלאפון</label>
+                <label asp-for="PhoneNumber" class="control-label"></label>
                 <input asp-for="PhoneNumber" class="form-control" />
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Email" class="control-label">אימייל</label>
+                <label asp-for="Email" class="control-label"></label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="WorkerType" class="control-label">תפקיד</label>
+                <label asp-for="WorkerType" class="control-label"></label><br />
                 <select asp-for="WorkerType">
                     <option value="0">בחר</option>
                     <option value="1">מנהל</option>
@@ -44,14 +45,14 @@
                 <span asp-validation-for="WorkerType" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="הרשם" class="btn btn-primary" />
+                <input type="submit" value="הרשם" class="btn btn-warning" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Login">Login</a>
+    <a asp-action="Login">כניסה</a>
 </div>
 @section Css{
     <link rel="stylesheet" href="~/css/Workers.css" />
