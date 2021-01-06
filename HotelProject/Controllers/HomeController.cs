@@ -46,6 +46,7 @@ namespace HotelProject.Controllers
         }
         public IActionResult Search(DateTime fromDate, DateTime toDate, int numOfAdults, int numOfKids,int numOfInfants)
         {
+            roomTypeTotal = null;
             //if(fromDate == new DateTime() || toDate == new DateTime() || numOfAdults == 0)
             //{
             //    ViewBag.EnterDetails = "You must specify dates and number of people!";

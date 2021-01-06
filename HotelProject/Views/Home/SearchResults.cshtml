@@ -31,7 +31,7 @@
                                     מחיר כולל:
                                 </dt>
                                 <dd class="col-sm-2 white">
-                                    @room.Key.BasicPrice
+                                   @String.Format("{0:0,0}", @room.Key.BasicPrice) 
                                 </dd>
                             </dl>
                         </div>
