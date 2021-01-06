@@ -1,7 +1,9 @@
 ﻿body {
     background-color: rgb(28,28,28);
 }
-
+ul{
+    list-style: none;
+}
 .navbar-inverse {
     background-color: rgb(28,28,28);
     border-color: rgb(28,28,28);
@@ -18,7 +20,7 @@
     }
 
         .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > li > a:focus,
-        .navbar-nav > li > a:hover {
+        .navbar-nav > li > a:hover, li.nav-item > a:hover {
             text-decoration: underline;
             color: rgb(188,148,26) !important;
         }

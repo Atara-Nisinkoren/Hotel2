@@ -13,24 +13,29 @@ namespace HotelProject.Models
         public int Id { get; set; }
 
         //תעודת זהות
-        [Required]
+        [Required(ErrorMessage = "שדה תעודת זהות הינו שדה חובה")]
+        [Display(Name = "תעודת זהות")]
         public string WorkerId { get; set; }
 
         //שם
-        [Required]
+        [Required(ErrorMessage = "שדה שם הינו שדה חובה")]
+        [Display(Name = "שם")]
         public string Name { get; set; }
 
         //מספר פלאפון
-        [Required]
+        [Required(ErrorMessage = "שדה מספר טלפון הינו שדה חובה")]
         [DataType(DataType.PhoneNumber)]
+        [Display(Name = "מספר טלפון")]
         public string PhoneNumber { get; set; }
 
         //אימייל
-        [Required]
+        [Required(ErrorMessage = "שדה אימייל הינו שדה חובה")]
         [DataType(DataType.EmailAddress)]
+        [Display(Name = "אימייל")]
         public string Email { get; set; }
 
         //תפקיד העובד
+        [Display(Name = "תפקיד")]
         public int WorkerType { get; set; }
     }
 }
