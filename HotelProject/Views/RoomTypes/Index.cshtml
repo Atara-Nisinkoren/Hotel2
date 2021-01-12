@@ -6,15 +6,18 @@
 
 <div class="container">
     <div class="row">
+
         @foreach (var item in Model)
         {
-            <div class="col-md-4 col-sm-12 col-lg-4">
+            <div class="col-md-6 col-sm-12 col-lg-4">
+                
                 <a asp-action="details" asp-route-id="@item.Id"><h3 class="hebrew">@item.Name</h3></a>
                 <img src="@item.ImgUrl" class="card-img" alt="...">
             </div>
         }
     </div>
 </div>
+  
 
 @section css{
     <link rel="stylesheet" href="~/css/Roomspages.css" />
