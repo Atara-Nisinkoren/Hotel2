@@ -42,30 +42,30 @@
         </div>
 
         <div class="col-sm-12 col-xs-12 col-md-10">
-            <form asp-controller="Orders" asp-action="Payment">
+            <form asp-controller="Orders" asp-action="Payment" onsubmit="foo()">
                 <div class="row">
                     <div class="col-sm-10 col-xs-10 col-md-5">
                         <h1 class="paymentTitle">פרטי האורח</h1>
                         <ul class="list">
                             <li>
                                 <label>תעודת זהות*</label><br>
-                                <input type="text" name="ID">
+                                <input required pattern="[0-9]{9}" maxlength="9" type="text" name="ID" title="יש להכניס 9 ספרות">
                             </li>
                             <li>
                                 <label> שם מלא*</label><br>
-                                <input type="text" name="Name">
+                                <input required type="text" name="Name">
                             </li>
                             <li>
                                 <label>אימייל*</label><br>
-                                <input type="email" name="Email">
+                                <input required type="email" name="Email">
                             </li>
                             <li>
                                 <label>טלפון*</label><br>
-                                <input type="text" name="PhoneNumber">
+                                <input required type="text" name="PhoneNumber">
                             </li>
                             <li>
                                 <label>כתובת*</label><br>
-                                <input type="text" name="Address">
+                                <input required type="text" name="Address">
                             </li>
                         </ul>
                     </div>
@@ -74,12 +74,11 @@
                         <ul class="list">
                             <li>
                                 <label>מספר כרטיס</label><br>
-                                <input type="text" name="cardNumber">
+                                <input required pattern="[0-9]{16}"  maxlength="16" type="text" name="cardNumber" title="יש להכניס 16 ספרות">
                             </li>
                             <li>
-                                <label>תוקף כרטיס אשראי</label><br>
-                                @*<input type="text" name="creditValidity">*@
-                                <select name="expiryYear">
+                                <label>תוקף כרטיס אשראי</label><br />
+                                <select required name="expiryYear">
                                     <option value="21">2021</option>
                                     <option value="22">2022</option>
                                     <option value="23">2023</option>
@@ -87,7 +86,7 @@
                                     <option value="25">2025</option>
                                 </select>
                                 <label>/</label>
-                                <select name="expiryMonth">
+                                <select required name="expiryMonth">
                                     <option value="01">1</option>
                                     <option value="02">2 </option>
                                     <option value="03">3</option>
@@ -105,15 +104,28 @@
                             </li>
                             <li>
                                 <label>3 ספרות אחרונות בגב הכרטיס</label><br>
-                                <input type="text" name="cvv">
+                                <input required pattern="[0-9]{3}"  maxlength="3" type="text" name="cvv" title="יש להכניס 3 ספרות אחרונות בגב הכרטיס">
                             </li>
                             <li>
                                 <label>תעודת זהות של בעל הכרטיס</label><br>
-                                <input type="text" name="idCredit">
+                                <input required pattern="[0-9]{9}"  maxlength="9" type="text" name="idCredit" title="יש להכניס 9 ספרות">
                             </li>
                             <li>
                                 <label>מספר תשלומים</label><br>
-                                <input type="text" name="numberOfPayment">
+                                <select required name="numberOfPayment">
+                                    <option value=1>1</option>
+                                    <option value=2>2 </option>
+                                    <option value=3>3</option>
+                                    <option value=4>4</option>
+                                    <option value=5>5</option>
+                                    <option value=6>6</option>
+                                    <option value=7>7</option>
+                                    <option value=8>8</option>
+                                    <option value=9>9</option>
+                                    <option value=10>10</option>
+                                    <option value=11>11</option>
+                                    <option value=12>12</option>
+                                </select>
                             </li>
                             <br>
                             <br>
@@ -173,4 +185,22 @@
 </script>
 @section Css{
     <link rel="stylesheet" href="~/css/Payment.css" />
+}
+@section Scripts{
+    <script>
+        function phonenumber(inputtxt) {
+            var phoneno = /^\d{10}$/;
+            if ((inputtxt.value.match(PhoneNumber))
+            {
+                return true;
+            }
+            else {
+                alert("message");
+                return false;
+            }
+        }
+        function foo() {
+            alert("וודאו שהכנסתם את הפרטים הנכונים");
+        }
+    </script>
 }
