@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HotelProject.Data;
 using HotelProject.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace HotelProject.Controllers
 {
@@ -22,6 +23,8 @@ namespace HotelProject.Controllers
         // GET: RoomsOrders
         public async Task<IActionResult> Index()
         {
+
+
             var hotelProjectContext = _context.RoomsOrders.Include(r => r.Order).Include(r => r.Room);
             return View(await hotelProjectContext.ToListAsync());
         }
@@ -87,6 +90,7 @@ namespace HotelProject.Controllers
             }
             ViewData["OrderId"] = new SelectList(_context.Order, "Id", "ClientID", roomsOrders.OrderId);
             ViewData["RoomId"] = new SelectList(_context.Room, "Id", "Id", roomsOrders.RoomId);
+
             return View(roomsOrders);
         }
 
@@ -143,6 +147,8 @@ namespace HotelProject.Controllers
             {
                 return NotFound();
             }
+
+
 
             return View(roomsOrders);
         }

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>רשימת הזמנות קיימות</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -34,32 +34,42 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FromDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ToDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumOfAdults)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumOfKids)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumOfInfants)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalPrice)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FromDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ToDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumOfAdults)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumOfKids)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumOfInfants)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalPrice)
+                </td>
+                <td>
+                    
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+<a asp-controller="Workers" asp-action="Class1">חזרה לדף מנהל</a>
+
+@section Css{
+    <link rel="stylesheet" href="~/css/Workers.css" />
+}
