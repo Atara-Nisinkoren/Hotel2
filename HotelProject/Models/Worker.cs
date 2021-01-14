@@ -15,6 +15,7 @@ namespace HotelProject.Models
         //תעודת זהות
         [Required(ErrorMessage = "שדה תעודת זהות הינו שדה חובה")]
         [Display(Name = "תעודת זהות")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "תעודת זהות שגויה"), StringLength(9)]
         public string WorkerId { get; set; }
 
         //שם
@@ -24,6 +25,7 @@ namespace HotelProject.Models
 
         //מספר פלאפון
         [Required(ErrorMessage = "שדה מספר טלפון הינו שדה חובה")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "מספר טלפון שגוי"), StringLength(10)]
         [DataType(DataType.PhoneNumber)]
         [Display(Name = "מספר טלפון")]
         public string PhoneNumber { get; set; }
@@ -32,6 +34,7 @@ namespace HotelProject.Models
         [Required(ErrorMessage = "שדה אימייל הינו שדה חובה")]
         [DataType(DataType.EmailAddress)]
         [Display(Name = "אימייל")]
+        [EmailAddress]
         public string Email { get; set; }
 
         //תפקיד העובד
