@@ -33,5 +33,7 @@ namespace HotelProject.Models
         [Required]
         public ICollection<RoomsOrders> Orders { get; set; }
 
+
+      
     }
 }

@@ -158,6 +158,8 @@ namespace HotelProject.Controllers
             {
                 _context.Add(order);
                 await _context.SaveChangesAsync();
+
+
                 return RedirectToAction(nameof(Index));
             }
             return View(order);
@@ -175,6 +177,11 @@ namespace HotelProject.Controllers
             if (order == null)
             {
                 return NotFound();
+            }
+
+            if (HttpContext.Session.GetString("Name") == null)
+            {
+                return RedirectToAction("Login", "Workers");
             }
             return View(order);
         }
@@ -211,6 +218,11 @@ namespace HotelProject.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
+            if (HttpContext.Session.GetString("Name") == null)
+            {
+                return RedirectToAction("Login", "Workers");
+            }
             return View(order);
         }
 
@@ -229,6 +241,10 @@ namespace HotelProject.Controllers
                 return NotFound();
             }
 
+            if (HttpContext.Session.GetString("Name") == null)
+            {
+                return RedirectToAction("Login", "Workers");
+            }
             return View(order);
         }
 

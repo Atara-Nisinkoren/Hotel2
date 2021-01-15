@@ -1,15 +1,10 @@
 ﻿
-/* *{
-    background-color: white;
-} */
 * {
     color: rgb(188,148,26);
 }
 .no-gutters {
     margin-right: 3%;
     margin-left: 3%;
-    background-color: white;
-    color: #1c1c1c;
 }
 
 .right {
@@ -22,12 +17,14 @@
 .col-md-6 {
     background-color: rgb(28,28,28);
 }
-
+.card-title {
+    font-weight: bold;
+    font-size: 20px;
+}
 .title {
     text-align: center;
-    margin: 12;
-    color: rgb(188,148,26);
-    color: blanchedalmond;
+    margin: 12 px;
+    font-size: 48px;
 }
 
 .centertext {
@@ -45,12 +42,12 @@
 }
 
 .fsize {
-    font-size: 20px;
+    font-size: 18px;
 }
 
-.fs {
+/*.fs {
     font-size: 48px;
-}
+}*/
 
 .mbb {
     margin-top: 5rem;
