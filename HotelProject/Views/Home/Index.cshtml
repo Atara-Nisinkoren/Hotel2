@@ -47,6 +47,7 @@
     }
 </div>
 <script>
+    disableFromDates();
     function increaseValue(id) {
         var value = parseInt(document.getElementById('number' + id).value, 10);
         value = isNaN(value) ? 0 : value;
@@ -69,11 +70,11 @@
         });
     }
 
-    document.onload(function () {
+    function disableFromDates() {
         document.getElementById('FromDate').datepicker({
             minDate: new Date()
         });
-    });
+    };
 </script>
 
 @section Css{
