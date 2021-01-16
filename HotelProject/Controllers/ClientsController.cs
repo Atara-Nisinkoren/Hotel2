@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HotelProject.Data;
 using HotelProject.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace HotelProject.Controllers
 {
@@ -79,6 +80,11 @@ namespace HotelProject.Controllers
             {
                 return NotFound();
             }
+
+            if (HttpContext.Session.GetString("Name") == null)
+            {
+                return RedirectToAction("Login", "Workers");
+            }
             return View(client);
         }
 
@@ -132,6 +138,10 @@ namespace HotelProject.Controllers
                 return NotFound();
             }
 
+            if (HttpContext.Session.GetString("Name") == null)
+            {
+                return RedirectToAction("Login", "Workers");
+            }
             return View(client);
         }
 

@@ -37,6 +37,20 @@ namespace HotelProject.Controllers
             return View(await _context.Worker.ToListAsync());
         }
 
+
+        public async Task<IActionResult> Class1()
+        {
+            if (HttpContext.Session.GetString("Name") == null)
+            {
+                return RedirectToAction("Login", "Workers");
+            }
+            return View();
+        }
+
+
+        /// <param name="id"></param>
+        /// <returns></returns>
+
         // GET: Workers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -80,7 +94,7 @@ namespace HotelProject.Controllers
                 { 
                    HttpContext.Session.SetString("Name", q.First().Name);
                     HttpContext.Session.SetInt32("Id", q.First().Id);
-                    return RedirectToAction("Create", "RoomTypes");
+                    return RedirectToAction("Class1");
                 }
                 else
                     ViewData["Error1"] = "You do not have permission to  modifying and editing data in the website";
@@ -126,6 +140,12 @@ namespace HotelProject.Controllers
             {
                 return NotFound();
             }
+
+            if (HttpContext.Session.GetString("Name") == null)
+            {
+                return RedirectToAction("Login");
+            }
+
             return View(worker);
         }
 
@@ -177,6 +197,10 @@ namespace HotelProject.Controllers
             if (worker == null)
             {
                 return NotFound();
+            }
+            if (HttpContext.Session.GetString("Name") == null)
+            {
+                return RedirectToAction("Login");
             }
 
             return View(worker);

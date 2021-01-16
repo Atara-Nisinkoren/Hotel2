@@ -49,5 +49,8 @@ namespace HotelProject.Models
         [Required]
         public double TotalPrice { get; set; }
 
+
+     
+
     }
 }

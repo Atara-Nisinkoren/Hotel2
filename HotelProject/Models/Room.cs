@@ -35,5 +35,7 @@ namespace HotelProject.Models
         [JsonIgnore]
         public ICollection<RoomsOrders> Orders { get; set; }
 
+
+      
     }
 }

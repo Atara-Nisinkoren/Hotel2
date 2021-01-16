@@ -10,6 +10,9 @@ ul{
     margin-bottom: 0px;
     box-shadow: 5px 3px 8px 3px rgb(188,148,26);
 }
+/*.navbar-toggle {
+    display: none;
+}*/
 .div {
     color: rgb(188,148,26);
 }

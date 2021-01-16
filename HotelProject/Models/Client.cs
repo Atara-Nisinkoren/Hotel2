@@ -10,7 +10,8 @@ namespace HotelProject.Models
     {
         //תעודת זהות
         [Key]
-        [StringLength(9, ErrorMessage = "תעודת זהות שגויה")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "תעודת זהות שגויה"), StringLength(9)]
+        
         //[DataType(DataType.)]
         public string ID { get; set; }
 
@@ -22,7 +23,7 @@ namespace HotelProject.Models
 
         //מספר פלאפון
         [Required(ErrorMessage = "מספר טלפון שדה חובה")]
-        [StringLength(10, ErrorMessage = "מספר טלפון שגוי")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "מספר טלפון שגוי"), StringLength(10)]
         [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
 
@@ -34,6 +35,7 @@ namespace HotelProject.Models
         //אימייל
         [Required(ErrorMessage = "אימייל שדה חובה")]
         [StringLength(50, ErrorMessage = "יש לקצר את האימייל עד 50 תוים")]
+        [EmailAddress]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
