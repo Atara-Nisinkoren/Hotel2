@@ -80,11 +80,10 @@
                                 <label>תוקף כרטיס אשראי</label><br>
                                 @*<input type="text" name="creditValidity">*@
                                 <select name="expiryYear">
-                                    <option value="21">2021</option>
-                                    <option value="22">2022</option>
-                                    <option value="23">2023</option>
-                                    <option value="24">2024</option>
-                                    <option value="25">2025</option>
+                                    @for (int i = 0; i < 10; i++)
+                                    {
+                                        <option value="@DateTime.Now.AddYears(i).Year.ToString()">@DateTime.Now.AddYears(i).Year.ToString()</option>
+                                    }
                                 </select>
                                 <label>/</label>
                                 <select name="expiryMonth">
@@ -141,7 +140,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="text-align:right;">
                 @if (ViewBag.OrderDone != null)
                 {
                     <p>@ViewBag.OrderDone</p>
@@ -151,23 +150,23 @@
                     <p>@ViewBag.OrderFailed</p>
                 }
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer" style="float:left">
                 <a asp-controller="Home" asp-action="Index" class="btn btn-warning" data-dismiss="modal">סגור</a>
             </div>
         </div>
     </div>
 </div>
 <script>
-    $(document).ready(function () {
-        if (@ViewBag.OrderDone != null) {
-            debugger;
-            $('#myModal').modal('show');
-        }
-               else if(@ViewBag.OrderFailed != null)
+    document.ready(function () {
+        var successMsg = "@ViewBag.OrderDone";
+        var failureMsg = "@ViewBag.OrderFailed";
+        if (successMsg) {
+            document.getElementsById('myModal').show();
+       }
+         else if(failureMsg)
         {
-            debugger;
-                    $('#myModal').modal('show');
-                }
+           document.getElementsById('myModal').show();
+        }
     });
 
 </script>

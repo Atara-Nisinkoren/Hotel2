@@ -104,7 +104,7 @@ namespace HotelProject.Controllers
                     //order.Rooms.Add(room);
                 }
                 ViewBag.OrderDone = "(:הזמנתך התקבלה בהצלחה. מחכים לראות אותך";
-                return RedirectToAction("Index", "Home");
+               // return RedirectToAction("Index", "Home");
             }
             else {
                 ViewBag.OrderFailed = "מצטערים הזמנה נכשלה. אנא צרו קשר עם שירות לקוחות";
