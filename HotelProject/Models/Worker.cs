@@ -15,6 +15,7 @@ namespace HotelProject.Models
         //תעודת זהות
         [Required(ErrorMessage = "שדה תעודת זהות הינו שדה חובה")]
         [Display(Name = "תעודת זהות")]
+        [MinLengthAttribute(9, ErrorMessage = "יש להקליד תעודת זהות עם 9 ספרות")]
         [RegularExpression("^[0-9]*$", ErrorMessage = "תעודת זהות שגויה"), StringLength(9)]
         public string WorkerId { get; set; }
 

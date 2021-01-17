@@ -38,7 +38,7 @@ namespace HotelProject.Controllers
         }
 
 
-        public async Task<IActionResult> Class1()
+        public async Task<IActionResult> ManagerPage()
         {
             if (HttpContext.Session.GetString("Name") == null)
             {
@@ -95,7 +95,7 @@ namespace HotelProject.Controllers
                 { 
                    HttpContext.Session.SetString("Name", q.First().Name);
                     HttpContext.Session.SetInt32("Id", q.First().Id);
-                    return RedirectToAction("Class1");
+                    return RedirectToAction("ManagerPage");
                 }
                 else
                     ViewData["Error1"] = "You do not have permission to  modifying and editing data in the website";
@@ -124,7 +124,7 @@ namespace HotelProject.Controllers
             {
                 _context.Add(worker);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Login));
             }
             return View(worker);
         }

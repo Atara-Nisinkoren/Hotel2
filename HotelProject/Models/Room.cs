@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -31,6 +32,7 @@ namespace HotelProject.Models
 
         //מס' הזמנה פעילה לחדר
         [Required]
+        [JsonIgnore]
         public ICollection<RoomsOrders> Orders { get; set; }
 
 
