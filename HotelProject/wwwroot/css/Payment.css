@@ -16,10 +16,13 @@
     color: gold;
     text-decoration: underline;
 }
-
-
+.btn-outline-warning {
+    color: black;
+}
 .btn {
     padding: 25px;
+    background-color: gold;
+    ;
 }
 
 .btn-primary {

@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<HotelProject.Models.RoomType>
 @{
-    ViewData["title"] = "Index";
+    ViewData["title"] = "עריכת סוגי חדרים";
 }
 
 
@@ -10,14 +10,14 @@
         @foreach (var item in Model)
         {
             <div class="col-md-6 col-sm-12 col-lg-4">
-                
+
                 <a asp-action="details" asp-route-id="@item.Id"><h3 class="hebrew">@item.Name</h3></a>
-                <img src="@item.ImgUrl" class="card-img" alt="...">
+                <img src="@item.ImgUrl" class="card-img">
             </div>
         }
     </div>
 </div>
-  
+
 
 @section css{
     <link rel="stylesheet" href="~/css/Roomspages.css" />
@@ -86,7 +86,7 @@
                     @Html.DisplayFor(modelItem => item.ImgUrl)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Edit" asp-route-id="@item.Id">עריכה</a> |
                     <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </td>

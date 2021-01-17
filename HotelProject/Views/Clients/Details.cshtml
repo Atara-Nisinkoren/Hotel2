@@ -1,14 +1,12 @@
 ﻿@model HotelProject.Models.Client
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "פרטי לקוח";
 }
 
-<h1>Details</h1>
+<h1>פרטי לקוח</h1>
 
 <div>
-    <h4>Client</h4>
-    <hr />
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
@@ -37,8 +35,9 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.ID">עריכה</a> |
+    <a asp-action="Index">חזרה לרשימה</a>
+    <a asp-controller="Orders" asp-action="Index">חזרה לרשימת הזמנות</a>
 </div>
 
 @section Css{
