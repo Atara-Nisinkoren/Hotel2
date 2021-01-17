@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<HotelProject.Models.Order>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "רשימת הזמנות קיימות";
 }
 
 <h1>רשימת הזמנות קיימות</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">הזמנה חדשה</a>
 </p>
 <table class="table">
     <thead>
@@ -62,31 +62,19 @@
                 @Html.DisplayFor(modelItem => item.TotalPrice)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Client.ID)
-                @Html.DisplayFor(modelItem => item.Client.Name)
-                @*@if (item.Client != null)
-                {
-                    <a asp-controller="Clients" asp-action="Details" asp-route-id="@item.Client.ID">@item.Client.Name</a>
-                }*@
+                @*@Html.DisplayFor(modelItem => item.Client.ID)*@
+                <a asp-controller="Clients" asp-action="Details" asp-route-id="@item.Client.ID">@Html.DisplayFor(modelItem => item.Client.Name)</a>
             </td>
             <td>
                 @foreach (var room in item.Rooms)
                 {
                     @Html.DisplayFor(modelItem => room.RoomId)
                 }
-                @*@if (item.Rooms != null)
-                {
-                    @foreach (var r in item.Rooms)
-                    {
-                        ViewBag.rooms += r.RoomId + ", ";
-                    }
-                    @ViewBag.rooms
-                }*@
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">עריכה</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">פרטים</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">מחיקה</a>
             </td>
         </tr>
         }

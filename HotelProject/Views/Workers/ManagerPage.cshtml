@@ -1,7 +1,7 @@
 ﻿@model HotelProject.Models.Worker
 
 @{
-    ViewData["Title"] = "ManagerPage";
+    ViewData["Title"] = "עמוד מנהל";
 }
 
 
@@ -14,29 +14,40 @@
     <div class="col-md-4" style="text-align:center">
         <h1>דף מנהל</h1>
         <br />
-        <div>
-            <a asp-action="Index">לחץ כאן לרשימת ועריכת העובדים</a>
+        <div class="fs">
+            <div>
+                <a asp-action="Index">לחץ כאן לרשימת ועריכת העובדים</a>
+            </div>
+            <br />
+            <div>
+                <a asp-controller="Orders" asp-action="Index">לחץ כאן לרשימת ועריכת ההזמנות</a>
+            </div>
+            </br>
+            <div>
+                <a asp-controller="RoomTypes" asp-action="Create"> לחץ כאן ליצירת סוג חדר חדש</a>
+            </div>
+            <br />
+            <div>
+                <a asp-controller="Clients" asp-action="Index"> לחץ כאן לרשימת הלקוחות הקיימים</a>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
         </div>
-        <br />
-        <div>
-            <a asp-controller="Orders" asp-action="Index">לחץ כאן לרשימת ועריכת ההזמנות</a>
-        </div>
-        </br>
-        <div>
-            <a asp-controller="RoomTypes" asp-action="Create"> לחץ כאן ליצירת סוג חדר חדש</a>
-        </div>
-        <br />
-        <div>
-            <a asp-controller="Clients" asp-action="Index"> לחץ כאן לרשימת הלקוחות הקיימים</a>
-        </div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
     </div>
 </div>
-
 
 
 
