@@ -77,7 +77,7 @@ namespace HotelProject.Controllers
             bool success = true;//should use payment paramters for perform payment. now ignore it.
             if (success)
             {
-                //enter thr order to DB
+                //enter the order to DB
                 order.Client = existsClient;
                 var roomsNumbers = HttpContext.Session.GetString("roomsNumbers");
                 string[] numbersOfRooms = roomsNumbers.Split(',');
@@ -85,12 +85,9 @@ namespace HotelProject.Controllers
                 {
                     RoomsOrders roomOr = new RoomsOrders();
                     roomOr.RoomId = int.Parse(numbersOfRooms[i]);
-                    //roomOr.OrderId = order.Id;
                     roomOr.Order = order;
                     roomOr.Room = _context.Room.FirstOrDefault(r => r.Id == roomOr.RoomId);
 
-                    //_context.RoomsOrders.Add(roomOr);
-                    // _context.SaveChanges
                     if (order.Rooms == null) order.Rooms = new List<RoomsOrders>();
                     order.Rooms.Add(roomOr);
                     

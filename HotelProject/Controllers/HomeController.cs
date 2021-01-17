@@ -43,7 +43,7 @@ namespace HotelProject.Controllers
         }
         public IActionResult Search(DateTime fromDate, DateTime toDate, int numOfAdults, int numOfKids, int numOfInfants)
         {
-            if (fromDate < DateTime.Now || toDate == fromDate || numOfAdults == 0)
+            if (fromDate < DateTime.Now || toDate <= fromDate || numOfAdults == 0)
             {
                 ViewBag.EnterDetails = "חובה להזין תאריכים תקינים ולבחור לפחות מבוגר אחד בהזמנה";
                 return View("Index");
@@ -139,7 +139,6 @@ namespace HotelProject.Controllers
             Dictionary<RoomType, int> OrderOptionsResult = new Dictionary<RoomType, int>();
             int numBadsForRoom, kidsForRoom, numOfnights;
             double totalPrice, priceForKid, priceFor1Adult;
-            //int numOfPeople = numOfAdults + numOfKids;
             foreach (var roomType in roomTypes)
             {
                 var currentType = _context.RoomType.FirstOrDefault(ty => ty.Id == roomType.Key);
@@ -224,9 +223,9 @@ namespace HotelProject.Controllers
                     }
 
                 }
-                HttpContext.Session.SetString("roomTypeTotal", JsonConvert.SerializeObject(roomTypeTotal));
-                HttpContext.Session.SetString("avaliableRoomsTypes", JsonConvert.SerializeObject(roomTypes));
             }
+            HttpContext.Session.SetString("roomTypeTotal", JsonConvert.SerializeObject(roomTypeTotal));
+            HttpContext.Session.SetString("avaliableRoomsTypes", JsonConvert.SerializeObject(roomTypes));
             return OrderOptionsResult;
         }
 
