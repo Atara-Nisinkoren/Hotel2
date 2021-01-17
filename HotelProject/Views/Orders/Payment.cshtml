@@ -28,15 +28,10 @@
                 {
                     <label> @Model.NumOfInfants תינוקות </label>
                 }
-                @if (Model.Rooms != null)
-                {
-                    <label>מס' חדרים: @Model.Rooms.Count </label>
-                    @*@foreach (var room in Model.Rooms)
-                    {
-                    <p>@room.Room.Type.Name</p>
-                    <p>@room.Room.Type.Desc</p>
-                    }*@
-                }
+                @*@if (Model.Rooms != null)*@
+                @*{*@
+                    <label>מס' חדרים: @ViewBag.NumOfRooms</label>
+                @*}*@
                 <br>
                 <lablel>מחיר @String.Format("{0:0,0}", @Model.TotalPrice)  ₪</lablel>
             </p>
@@ -94,18 +89,10 @@
                                 </select>
                                 <label>/</label>
                                 <select name="expiryMonth">
-                                    <option value="01">1</option>
-                                    <option value="02">2 </option>
-                                    <option value="03">3</option>
-                                    <option value="04">4</option>
-                                    <option value="05">5</option>
-                                    <option value="06">6</option>
-                                    <option value="07">7</option>
-                                    <option value="08">8</option>
-                                    <option value="09">9</option>
-                                    <option value="10">10</option>
-                                    <option value="11">11</option>
-                                    <option value="12">12</option>
+                                    @for (int i = 1; i <= 12; i++)
+                                    {
+                                    <option value="@i.ToString()">@i.ToString()</option>
+                                    }
                                 </select>
                             </li>
                             <li>
@@ -121,16 +108,10 @@
                             <li>
                                 <label>מספר תשלומים</label><br>
                                 <select name="num">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
+                                    @for (int i = 1; i <= 10; i++)
+                                    {
+                                    <option value="@i.ToString()">@i.ToString()</option>
+                                    }
                                 </select>
                             </li>
                             <br>
@@ -147,7 +128,6 @@
                 </div>
             </form>
         </div>
-
     </div>
 </div>
 <div class="modal" tabindex="-1" role="dialog" id="myModal">
@@ -161,29 +141,30 @@
             <div class="modal-body" style="text-align:right;">
                 @if (ViewBag.OrderDone != null)
                 {
-                    <p>@ViewBag.OrderDone</p>
+                    <h1>@ViewBag.OrderDone</h1>
                 }
                 @if (ViewBag.OrderFailed != null)
                 {
-                    <p>@ViewBag.OrderFailed</p>
+                    <h1>@ViewBag.OrderFailed</h1>
                 }
             </div>
-            <div class="modal-footer" style="float:left">
+            <div class="modal-footer">
                 <a asp-controller="Home" asp-action="Index" class="btn btn-warning" data-dismiss="modal">סגור</a>
             </div>
         </div>
     </div>
 </div>
 <script>
-    document.ready(function () {
+    $(document).ready(function () {
+        debugger;
         var successMsg = "@ViewBag.OrderDone";
         var failureMsg = "@ViewBag.OrderFailed";
         if (successMsg) {
-            document.getElementsById('myModal').show();
+            $('#myModal').show();
        }
          else if(failureMsg)
         {
-           document.getElementsById('myModal').show();
+           $('#myModal').show();
         }
     });
 </script>
@@ -249,7 +230,8 @@
                 errorPhoneNumber.innerHTML = "המספר טלפון אינו תקין, חייב להכיל רק 10 ספרות";
                
             }
-            var Address = document.getElementById("Address").value;
+
+           var Address = document.getElementById("Address").value;
             if (!validateAddress(Address)) {
                 isValid = false;
                 errorAddress.innerHTML = "כתובת אינה תקינה, צריכה להיות בעברית";

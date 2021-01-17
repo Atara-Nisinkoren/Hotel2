@@ -24,7 +24,7 @@ namespace HotelProject.Controllers
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Order.ToListAsync());
+            return View(await _context.Order.Include(o=> o.Client).Include(or=> or.Rooms).ToListAsync());
         }
 
         // GET: Orders/Details/5
@@ -48,16 +48,7 @@ namespace HotelProject.Controllers
         [HttpGet]
         public IActionResult Payment(Order order)
         {
-            //List<int> rooms = HttpContext.Session.Get("rooms").Select(x => (int)x).ToList();
-            RoomsOrders room = new RoomsOrders();
-            var namRoomsFromSesion = HttpContext.Session.GetInt32("numRooms");
-            for (int i = 0; i < namRoomsFromSesion; i++)
-            {
-                room.RoomId = Convert.ToInt32(HttpContext.Session.GetInt32("room" + i));
-                if(order.Rooms == null)
-                    order.Rooms = new List<RoomsOrders>();
-                order.Rooms.Add(room);
-            }
+            ViewBag.NumOfRooms = HttpContext.Session.GetInt32("numRooms").ToString();
             return View(order);
         }
 
@@ -88,21 +79,25 @@ namespace HotelProject.Controllers
             {
                 //enter thr order to DB
                 order.Client = existsClient;
-                _context.Order.Add(order);
-                _context.SaveChanges();
-                RoomsOrders roomOr = new RoomsOrders();
-                var namRoomsFromSesion = HttpContext.Session.GetInt32("numRooms");
-                for (int i = 0; i < namRoomsFromSesion; i++)
+                var roomsNumbers = HttpContext.Session.GetString("roomsNumbers");
+                string[] numbersOfRooms = roomsNumbers.Split(',');
+                for (int i = 0; i < numbersOfRooms.Count(); i++)
                 {
-                    roomOr.RoomId = Convert.ToInt32(HttpContext.Session.GetInt32("room" + i));
-                    roomOr.OrderId = order.Id;
+                    RoomsOrders roomOr = new RoomsOrders();
+                    roomOr.RoomId = int.Parse(numbersOfRooms[i]);
+                    //roomOr.OrderId = order.Id;
                     roomOr.Order = order;
                     roomOr.Room = _context.Room.FirstOrDefault(r => r.Id == roomOr.RoomId);
 
-                    _context.RoomsOrders.Add(roomOr);
-                    _context.SaveChanges();
-                    //order.Rooms.Add(room);
+                    //_context.RoomsOrders.Add(roomOr);
+                    // _context.SaveChanges
+                    if (order.Rooms == null) order.Rooms = new List<RoomsOrders>();
+                    order.Rooms.Add(roomOr);
+                    
                 }
+                _context.Order.Add(order);
+                _context.SaveChanges();
+               
                 ViewBag.OrderDone = "(:הזמנתך התקבלה בהצלחה. מחכים לראות אותך";
                // return RedirectToAction("Index", "Home");
             }
@@ -112,33 +107,6 @@ namespace HotelProject.Controllers
             return View(order);
         }
 
-
-        //public ActionResult PaymentAction(Order order,
-        //                                 //customer's details
-        //                                 string id, string firstName, string lastName, string mail, string telPhone,
-        //                                 //payment's details
-        //                                 string ticketNumber, string creditValidity, string cvv, string idCredit, string numberPayment)
-        //{
-        //    //address? orders?
-        //    Client client = new Client { ID = id, Name = firstName + " " + lastName, Email = mail, PhoneNumber = telPhone, };
-        //    //check if client did order in the past.
-        //    var existsClient = await _context.Client.FindAsync(id);
-        //    //if is new client, add him to the system.
-        //    if (existsClient == null)
-        //    {
-
-        //        _context.Add(client);
-        //    }
-        //    bool success = true;//should use payment paramters for perform payment. now ignore it.
-        //    if (success)
-        //    {
-        //        //enter thr order to DB
-        //        order.Client = client;
-        //        _context.Add(order);
-        //    }
-
-        //    return View(order);
-        //}
 
 
         // GET: Orders/Create
