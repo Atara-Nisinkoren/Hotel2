@@ -42,7 +42,7 @@
 
 
 
-                        <a asp-controller="Home" asp-action="RedirectToPayment" asp-route-id="@room.Key.Id" type="submit" class="btn btn-outline-warning">
+                        <a asp-controller="Home" asp-action="RedirectToPayment" asp-route-id="@room.Key.Id" asp-route-numRooms="@room.Value" type="submit" class="btn btn-outline-warning">
                             הזמן
                             עכשיו
                         </a>
