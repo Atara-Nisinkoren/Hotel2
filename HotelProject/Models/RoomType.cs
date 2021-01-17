@@ -48,6 +48,7 @@ namespace HotelProject.Models
         public string ImgUrl { get; set; }
 
         //חדרים
+        [Display(Name = "חדרים")]
         public ICollection<Room> Rooms { get; set; }
     }
 }
