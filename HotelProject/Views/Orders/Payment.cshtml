@@ -27,22 +27,17 @@
                 {
                     <label> @Model.NumOfInfants תינוקות </label>
                 }
-                @if (Model.Rooms != null)
-                {
-                    <label>מס' חדרים: @Model.Rooms.Count </label>
-                    @*@foreach (var room in Model.Rooms)
-                        {
-                        <p>@room.Room.Type.Name</p>
-                        <p>@room.Room.Type.Desc</p>
-                        }*@
-                }
+                @*@if (Model.Rooms != null)*@
+                @*{*@
+                    <label>מס' חדרים: @ViewBag.NumOfRooms</label>
+                @*}*@
                 <br>
                 <lablel>מחיר @String.Format("{0:0,0}", @Model.TotalPrice)  ₪</lablel>
             </p>
         </div>
 
         <div class="col-sm-12 col-xs-12 col-md-10">
-            <form asp-controller="Orders" asp-action="Payment" onsubmit="return foo(event)";>
+            <form asp-controller="Orders" asp-action="Payment" onsubmit="foo(event)">
                 <div class="row">
                     <div class="col-sm-10 col-xs-10 col-md-5">
                         <h1 class="paymentTitle">פרטי האורח</h1>
@@ -84,7 +79,7 @@
                             </li>
                             <li>
                                 <label>תוקף כרטיס אשראי</label><br>
-                              @*<input type="text" name="creditValidity">**@
+                                @*<input type="text" name="creditValidity">**@
                                 <select name="expiryYear">
                                     @for (int i = 0; i < 10; i++)
                                     {
@@ -93,23 +88,15 @@
                                 </select>
                                 <label>/</label>
                                 <select name="expiryMonth">
-                                    <option value="01">1</option>
-                                    <option value="02">2 </option>
-                                    <option value="03">3</option>
-                                    <option value="04">4</option>
-                                    <option value="05">5</option>
-                                    <option value="06">6</option>
-                                    <option value="07">7</option>
-                                    <option value="08">8</option>
-                                    <option value="09">9</option>
-                                    <option value="10">10</option>
-                                    <option value="11">11</option>
-                                    <option value="12">12</option>
+                                    @for (int i = 1; i <= 12; i++)
+                                    {
+                                    <option value="@i.ToString()">@i.ToString()</option>
+                                    }
                                 </select>
                             </li>
                             <li>
                                 <label>3 ספרות אחרונות בגב הכרטיס</label><br>
-                                <input type="text"  id="cvv" name="cvv">
+                                <input type="text" id="cvv" name="cvv">
                                 <div id="errorcvv" style="color:red"></div>
                             </li>
                             <li>
@@ -119,18 +106,12 @@
                             </li>
                             <li>
                                 <label>מספר תשלומים</label><br>
-                            <select name="num">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                            </select>
+                                <select name="num">
+                                    @for (int i = 1; i <= 10; i++)
+                                    {
+                                    <option value="@i.ToString()">@i.ToString()</option>
+                                    }
+                                </select>
                             </li>
                             <br>
                             <br>
@@ -142,7 +123,7 @@
                         <input type="hidden" asp-for="ToDate" value="@Model.ToDate" />
                         <input type="hidden" asp-for="TotalPrice" />
                         <button id="btn_invite" type="submit" class="btn btn-outline-warning">הזמן</button>
-                        
+
 
 
 
@@ -150,7 +131,6 @@
                 </div>
             </form>
         </div>
-
     </div>
 </div>
 <div class="modal" tabindex="-1" role="dialog" id="myModal">
@@ -164,29 +144,30 @@
             <div class="modal-body" style="text-align:right;">
                 @if (ViewBag.OrderDone != null)
                 {
-                    <p>@ViewBag.OrderDone</p>
+                    <h1>@ViewBag.OrderDone</h1>
                 }
                 @if (ViewBag.OrderFailed != null)
                 {
-                    <p>@ViewBag.OrderFailed</p>
+                    <h1>@ViewBag.OrderFailed</h1>
                 }
             </div>
-            <div class="modal-footer" style="float:left">
+            <div class="modal-footer">
                 <a asp-controller="Home" asp-action="Index" class="btn btn-warning" data-dismiss="modal">סגור</a>
             </div>
         </div>
     </div>
 </div>
 <script>
-    document.ready(function () {
+    $(document).ready(function () {
+        debugger;
         var successMsg = "@ViewBag.OrderDone";
         var failureMsg = "@ViewBag.OrderFailed";
         if (successMsg) {
-            document.getElementsById('myModal').show();
+            $('#myModal').show();
        }
          else if(failureMsg)
         {
-           document.getElementsById('myModal').show();
+           $('#myModal').show();
         }
     });
 
@@ -195,7 +176,7 @@
     <link rel="stylesheet" href="~/css/Payment.css" />
 }
 
-@section Scripts{ 
+@section Scripts{
     <script>
 
         function validateID(ID) {
@@ -213,12 +194,12 @@
             return re.test(String(PhoneNumber).toLowerCase());
         }
 
-       function validateAddress(Address) {
+        function validateAddress(Address) {
             const re = /[\u0590-\u05FF]/;
             return re.test(String(Address).toLowerCase());
         }
 
-        
+
         function validatecardNumber(cardNumber) {
             const re = /^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|(222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11}|62[0-9]{14})$/;
             return re.test(String(cardNumber).toLowerCase());
@@ -234,11 +215,11 @@
             return re.test(String(idCredit).toLowerCase());
         }
 
-        
+
         function foo(e) {
 
             var isValid = true;
-       
+
             var error = document.getElementById("error");
 
             var ID = document.getElementById("ID").value;
@@ -256,7 +237,7 @@
 
             var Email = document.getElementById("Email").value;
             if (!validateEmail(Email)) {
-                    isValid = false;
+                isValid = false;
                 errorEmail.innerHTML = "כתובת אימייל אינה תקינה";
             }
 
@@ -264,10 +245,10 @@
             if (!validatePhoneNumber(PhoneNumber)) {
                 isValid = false;
                 errorPhoneNumber.innerHTML = "הטלפון אינו תקין";
-               
+
             }
 
-           var Address = document.getElementById("Address").value;
+            var Address = document.getElementById("Address").value;
             if (!validateAddress(Address)) {
                 isValid = false;
                 errorAddress.innerHTML = "כתובת אינה תקינה";
@@ -292,12 +273,11 @@
             }
 
 
-            if (!isValid)
-            {
-                 e.preventDefault();
+            if (!isValid) {
+                e.preventDefault();
             }
 
-            }
+        }
 
     </script>
 }

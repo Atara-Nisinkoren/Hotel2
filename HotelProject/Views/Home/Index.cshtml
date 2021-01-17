@@ -3,7 +3,6 @@
     ViewData["Title"] = "Home Page";
 }
 
-<link href="~/css/searchEngine.css" rel="stylesheet" />
 <div class="container-fluid container-sm" style="direction: rtl;">
     <form class="form-inline searchEngine" asp-action="Search">
         <div>
@@ -12,7 +11,7 @@
         </div>
         <div>
             <label asp-for="ToDate">תאריך עזיבה</label>
-            <input asp-for="ToDate" id="ToDate" type="date" class="form-control mb-2 mr-sm-2" >
+            <input asp-for="ToDate" id="ToDate" type="date" class="form-control mb-2 mr-sm-2">
         </div>
         <div>
             <label asp-for="NumOfAdults">מספר מבוגרים</label>
@@ -37,8 +36,8 @@
                 <input asp-for="NumOfInfants" type="number" class="number" id="number3" value="0" />
                 <div class="value-button" id="decrease3" onclick="decreaseValue(3)" value="Decrease Value">-</div>
             </div>
-        </div>       
-        <button id="serachBtn" type="submit" class="btn btn-outline-warning mb-2 mr-sm-2">חפש</button>
+        </div>
+        <button id="serachBtn" type="submit" class="btn btn-outline-warning mb-2 mr-sm-2" onclick="validateSearxhParams()">חפש</button>
     </form>
     @Html.Partial("_slideshow")
     @if (ViewBag.NoRoomFound != null)
@@ -47,7 +46,11 @@
     }
 </div>
 <script>
-    disableFromDates();
+    function validateSearxhParams() {
+        var isValid = false;
+        isValid = $('FromDate').value >= new Date();
+    }
+
     function increaseValue(id) {
         var value = parseInt(document.getElementById('number' + id).value, 10);
         value = isNaN(value) ? 0 : value;
@@ -64,20 +67,23 @@
     }
 
     function disableToDates() {
-        var fromDate = document.getElementById('FromDate').value;
-        document.getElementById('ToDate').datepicker({
+        var fromDate = $('FromDate').value;
+        $('ToDate').datepicker({
             minDate: fromDate
         });
     }
+    var date = new Date();
+    date.setDate(date.getDate());
 
-    function disableFromDates() {
-        document.getElementById('FromDate').datepicker({
-            minDate: new Date()
+    $(document).ready(function () {
+        $('FromDate').datepicker({
+            minDate: date            
         });
-    };
+    });
 </script>
 
 @section Css{
+    <link href="~/css/searchEngine.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/slideshow.css" />
 }
 @section Js{
