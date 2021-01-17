@@ -43,12 +43,11 @@ namespace HotelProject.Controllers
         }
         public IActionResult Search(DateTime fromDate, DateTime toDate, int numOfAdults, int numOfKids, int numOfInfants)
         {
-            //Dictionary<int, double> roomTypeTotal = null;
-            //if(fromDate == new DateTime() || toDate == new DateTime() || numOfAdults == 0)
-            //{
-            //    ViewBag.EnterDetails = "You must specify dates and number of people!";
-            //    return View("Index");
-            //}
+            if (fromDate < DateTime.Now || toDate == fromDate || numOfAdults == 0)
+            {
+                ViewBag.EnterDetails = "חובה להזין תאריכים תקינים ולבחור לפחות מבוגר אחד בהזמנה";
+                return View("Index");
+            }
             //Filling in order details
             Order newOrder = new Order()
             {

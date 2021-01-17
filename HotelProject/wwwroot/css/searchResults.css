@@ -9,6 +9,7 @@
 .right {
     direction: rtl;
     text-align: right;
+    line-height: 1.5;
 }
 
 .roomDes{

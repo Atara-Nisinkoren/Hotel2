@@ -4,7 +4,7 @@
 }
 
 <div class="container-fluid container-sm" style="direction: rtl;">
-    <form class="form-inline searchEngine" asp-action="Search">
+    <form class="form-inline searchEngine" asp-action="Search" onsubmit="validateSearchParams(event)">
         <div>
             <label asp-for="FromDate">תאריך הגעה</label>
             <input asp-for="FromDate" id="FromDate" type="date" class="form-control mb-2 mr-sm-2" onchange="disableToDates();">
@@ -37,7 +37,11 @@
                 <div class="value-button" id="decrease3" onclick="decreaseValue(3)" value="Decrease Value">-</div>
             </div>
         </div>
-        <button id="serachBtn" type="submit" class="btn btn-outline-warning mb-2 mr-sm-2" onclick="validateSearxhParams()">חפש</button>
+        <button id="serachBtn" type="submit" class="btn btn-outline-warning mb-2 mr-sm-2">חפש</button>
+        @if(ViewBag.EnterDetails!= null)
+        {
+            <h4>@ViewBag.EnterDetails</h4>
+        }
     </form>
     @Html.Partial("_slideshow")
     @if (ViewBag.NoRoomFound != null)
@@ -46,9 +50,12 @@
     }
 </div>
 <script>
-    function validateSearxhParams() {
+    function validateSearchParams(e) {
         var isValid = false;
-        isValid = $('FromDate').value >= new Date();
+        //isValid = $('#FromDate').value >= new Date();
+        isValid = $('#number1').value > 0;
+        debugger;
+        if (!isValid) e.preventDefault;
     }
 
     function increaseValue(id) {
