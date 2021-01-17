@@ -3,62 +3,62 @@
 @{
     ViewData["Title"] = "רשימת עובדים";
 }
+<div style="direction:rtl">
+    <h1 class="color" style="float:right">רשימת עובדים</h1>
 
-<h1 class="color">רשימת עובדים</h1>
-
-<p>
-    <a asp-action="Create">עובד חדש</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.WorkerId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhoneNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WorkerType)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    <p>
+        <a asp-action="Create">עובד חדש</a>
+    </p>
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.WorkerId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PhoneNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.WorkerType)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">עריכה</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">פרטים</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">מחיקה</a>
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.WorkerId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.WorkerType)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
-
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.WorkerId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.WorkerType)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">עריכה</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">פרטים</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">מחיקה</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 @section Css{
     <link rel="stylesheet" href="~/css/Workers.css" />
 }
