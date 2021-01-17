@@ -144,7 +144,7 @@ namespace HotelProject.Controllers
             foreach (var roomType in roomTypes)
             {
                 var currentType = _context.RoomType.FirstOrDefault(ty => ty.Id == roomType.Key);
-                int numOfAvRooms = roomType.Value.Count(s => s == ',') + 1;
+                int numOfAvRooms = roomType.Value == "All" ? currentType.Rooms.Count() : roomType.Value.Count(s => s == ',') + 1;
                 if (currentType == null) { throw new Exception("Problem with finding rooms."); }
                 numBadsForRoom = currentType.ExtraBeds + 2;
                 //מספר חדרים לפי 2 מבוגרים בחדר

@@ -1,10 +1,9 @@
 ﻿* {
     color: rgb(188,148,26);
 }
-
 .aboutBody {
     text-align: center;
-     background-color: white;
+    background: rgb(28,28,28);
 }
 
 .aboutTitle {
