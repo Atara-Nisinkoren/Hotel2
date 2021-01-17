@@ -4,10 +4,11 @@
     ViewData["Title"] = "עריכת עובד";
 }
 
-<h1>עריכת עובד</h1>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4" style="text-align:center">
+        <h1>עריכת עובד</h1>
+
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
@@ -41,10 +42,10 @@
                     <option value="4">עובד מטבח</option>
                 </select>
                 @*<input asp-for="WorkerType" class="form-control" />
-        <span asp-validation-for="WorkerType" class="text-danger"></span>*@
+                <span asp-validation-for="WorkerType" class="text-danger"></span>*@
             </div>
             <div class="form-group">
-                <input type="submit" value="שמור" class="btn btn-primary" />
+                <input type="submit" value="שמור" class="btn btn-warning" />
             </div>
         </form>
     </div>

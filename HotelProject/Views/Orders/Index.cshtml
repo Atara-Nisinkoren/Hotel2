@@ -3,84 +3,84 @@
 @{
     ViewData["Title"] = "רשימת הזמנות קיימות";
 }
+<div style="direction:rtl">
+    <h1 style="float:right">רשימת הזמנות קיימות</h1>
 
-<h1>רשימת הזמנות קיימות</h1>
-
-<p>
-    <a asp-action="Create">הזמנה חדשה</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FromDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ToDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumOfAdults)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumOfKids)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumOfInfants)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TotalPrice)
-            </th>
-            <th>
-                פרטי לקוח
-            </th>
-            <th>
-                חדרים בהזמנה
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FromDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ToDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumOfAdults)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumOfKids)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumOfInfants)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalPrice)
-            </td>
-            <td>
-                @*@Html.DisplayFor(modelItem => item.Client.ID)*@
-                <a asp-controller="Clients" asp-action="Details" asp-route-id="@item.Client.ID">@Html.DisplayFor(modelItem => item.Client.Name)</a>
-            </td>
-            <td>
-                @foreach (var room in item.Rooms)
-                {
-                    @Html.DisplayFor(modelItem => room.RoomId) <text> | </text>
-                }
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">עריכה</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">פרטים</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">מחיקה</a>
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
-
+    <p>
+        <a asp-action="Create">הזמנה חדשה</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FromDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ToDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NumOfAdults)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NumOfKids)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NumOfInfants)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalPrice)
+                </th>
+                <th>
+                    פרטי לקוח
+                </th>
+                <th>
+                    חדרים בהזמנה
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FromDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ToDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumOfAdults)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumOfKids)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumOfInfants)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalPrice) &#8362;
+                    </td>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.Client.ID)*@
+                        <a asp-controller="Clients" asp-action="Details" asp-route-id="@item.Client.ID">@Html.DisplayFor(modelItem => item.Client.Name)</a>
+                    </td>
+                    <td>
+                        @foreach (var room in item.Rooms)
+                        {
+                            @Html.DisplayFor(modelItem => room.RoomId) <text> | </text>
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">עריכה</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">פרטים</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">מחיקה</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 <a asp-controller="Workers" asp-action="ManagerPage">חזרה לדף מנהל</a>
 
 @section Css{
