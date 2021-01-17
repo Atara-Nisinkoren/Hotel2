@@ -5,3 +5,20 @@
 .white {
     color: white;
 }
+
+.right {
+    direction: rtl;
+    text-align: right;
+}
+
+.roomDes{
+    color: white !important;
+}
+
+.imgSize {
+    width: 300px !important;
+    height: 250px !important;
+}
+.card-img{
+    width:75% !important;
+}

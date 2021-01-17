@@ -62,18 +62,26 @@
                 @Html.DisplayFor(modelItem => item.TotalPrice)
             </td>
             <td>
-                @if(item.Client != null) { 
+                @Html.DisplayFor(modelItem => item.Client.ID)
+                @Html.DisplayFor(modelItem => item.Client.Name)
+                @*@if (item.Client != null)
+                {
                     <a asp-controller="Clients" asp-action="Details" asp-route-id="@item.Client.ID">@item.Client.Name</a>
-                }
+                }*@
             </td>
             <td>
-                @if(item.Rooms != null) { 
+                @foreach (var room in item.Rooms)
+                {
+                    @Html.DisplayFor(modelItem => room.RoomId)
+                }
+                @*@if (item.Rooms != null)
+                {
                     @foreach (var r in item.Rooms)
                     {
                         ViewBag.rooms += r.RoomId + ", ";
                     }
                     @ViewBag.rooms
-                }
+                }*@
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">עריכה</a> |
