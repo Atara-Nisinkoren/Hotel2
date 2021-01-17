@@ -98,7 +98,7 @@ namespace HotelProject.Controllers
                 _context.Order.Add(order);
                 _context.SaveChanges();
                
-                ViewBag.OrderDone = "(:הזמנתך התקבלה בהצלחה. מחכים לראות אותך";
+                ViewBag.OrderDone = "הזמנתך התקבלה בהצלחה. מחכים לראות אותך(:";
             }
             else {
                 ViewBag.OrderFailed = "מצטערים הזמנה נכשלה. אנא צרו קשר עם שירות לקוחות";
