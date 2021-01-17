@@ -2,20 +2,17 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-@if(ViewBag.OrderDone != null)
-{
-<p>@ViewBag.OrderDone</p>
-}
+
 <link href="~/css/searchEngine.css" rel="stylesheet" />
 <div class="container-fluid container-sm" style="direction: rtl;">
     <form class="form-inline searchEngine" asp-action="Search">
         <div>
             <label asp-for="FromDate">תאריך הגעה</label>
-            <input asp-for="FromDate" id="FromDate" type="date" class="form-control mb-2 mr-sm-2" placeholder="תאריך הגעה">
+            <input asp-for="FromDate" id="FromDate" type="date" class="form-control mb-2 mr-sm-2" onchange="disableToDates();">
         </div>
         <div>
             <label asp-for="ToDate">תאריך עזיבה</label>
-            <input asp-for="ToDate" id="ToDate" type="date" class="form-control mb-2 mr-sm-2" placeholder="תאריך עזיבה">
+            <input asp-for="ToDate" id="ToDate" type="date" class="form-control mb-2 mr-sm-2" >
         </div>
         <div>
             <label asp-for="NumOfAdults">מספר מבוגרים</label>
@@ -40,29 +37,7 @@
                 <input asp-for="NumOfInfants" type="number" class="number" id="number3" value="0" />
                 <div class="value-button" id="decrease3" onclick="decreaseValue(3)" value="Decrease Value">-</div>
             </div>
-        </div>
-        @*<div class="dropdown mb-2 mr-sm-2">
-                <label for="numOfPeople">מספר אנשים</label>
-                <input id="numOfPeople" type="text" class="form-control  dropdown-toggle" data-toggle="dropdown"
-                       placeholder=" מבוגר 1">
-                <div class="dropdown-menu">
-                    <div class="dropdown-item" href="#">
-                        מבוגרים  <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
-                        <input type="number" id="number" value="0" />
-                        <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
-                    </div>
-                    <div class="dropdown-item" href="#">
-                        ילדים  <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
-                        <input type="number" id="number" value="0" />
-                        <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
-                    </div>
-                    <div class="dropdown-item" href="#">
-                        תינוקות  <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
-                        <input type="number" id="number" value="0" />
-                        <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
-                    </div>
-                </div>
-            </div>*@
+        </div>       
         <button id="serachBtn" type="submit" class="btn btn-outline-warning mb-2 mr-sm-2">חפש</button>
     </form>
     @Html.Partial("_slideshow")
@@ -86,6 +61,19 @@
         value--;
         document.getElementById('number' + id).value = value;
     }
+
+    function disableToDates() {
+        var fromDate = document.getElementById('FromDate').value;
+        document.getElementById('ToDate').datepicker({
+            minDate: fromDate
+        });
+    }
+
+    document.onload(function () {
+        document.getElementById('FromDate').datepicker({
+            minDate: new Date()
+        });
+    });
 </script>
 
 @section Css{

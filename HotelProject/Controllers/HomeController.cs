@@ -3,6 +3,7 @@ using HotelProject.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,10 +16,10 @@ namespace HotelProject.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly HotelProjectContext _context;
-        private static Order newOrder;
+        // private static Order newOrder;
         private static IEnumerable<Room> avaliableRooms;
-        private static int numRooms;
-        private static Dictionary<int, double> roomTypeTotal;
+        //private static int numRooms;
+        //private static Dictionary<int, double> roomTypeTotal;
 
         public HomeController(ILogger<HomeController> logger, HotelProjectContext context)
         {
@@ -44,29 +45,30 @@ namespace HotelProject.Controllers
         {
             return View();
         }
-        public IActionResult Search(DateTime fromDate, DateTime toDate, int numOfAdults, int numOfKids,int numOfInfants)
+        public IActionResult Search(DateTime fromDate, DateTime toDate, int numOfAdults, int numOfKids, int numOfInfants)
         {
-            roomTypeTotal = null;
+            //Dictionary<int, double> roomTypeTotal = null;
             //if(fromDate == new DateTime() || toDate == new DateTime() || numOfAdults == 0)
             //{
             //    ViewBag.EnterDetails = "You must specify dates and number of people!";
             //    return View("Index");
             //}
             //Filling in order details
-            newOrder = new Order()
+            Order newOrder = new Order()
             {
                 FromDate = fromDate,
                 ToDate = toDate,
                 NumOfAdults = numOfAdults,
                 NumOfKids = numOfKids,
-                NumOfInfants= numOfInfants,
+                NumOfInfants = numOfInfants,
             };
-            avaliableRooms = new List<Room>();
+            HttpContext.Session.SetString("newOrder", JsonConvert.SerializeObject(newOrder));
+           /* IEnumerable<Room>*/ avaliableRooms = new List<Room>();
             Dictionary<RoomType, int> avaliableRoomsTypes = new Dictionary<RoomType, int>();
             List<int> notAvaliableRoomsIds = new List<int>();
 
             //take all rooms that appear in order table in the period given
-            var ordersInSameDates =  _context.Order.Where(o => (o.FromDate >= fromDate && o.FromDate < toDate) || (o.ToDate > fromDate && o.FromDate < fromDate)).ToList();
+            var ordersInSameDates = _context.Order.Where(o => (o.FromDate >= fromDate && o.FromDate < toDate) || (o.ToDate > fromDate && o.FromDate < fromDate)).ToList();
             if (ordersInSameDates != null && ordersInSameDates.Count() > 0)
             {
                 //Create a list of unavailable rooms
@@ -82,11 +84,11 @@ namespace HotelProject.Controllers
                     }
                 }
             }
-            if(notAvaliableRoomsIds.Count > 0)
+            if (notAvaliableRoomsIds.Count > 0)
             {
                 //Create a list of available rooms
                 avaliableRooms = _context.Room.Where(r => !notAvaliableRoomsIds.Contains(r.Id)).ToList();
-                if(avaliableRooms != null && avaliableRooms.Count() > 0)
+                if (avaliableRooms != null && avaliableRooms.Count() > 0)
                 {
                     foreach (var avRoom in avaliableRooms)
                     {
@@ -98,7 +100,7 @@ namespace HotelProject.Controllers
                         //Create a dictionary of available Typesrooms and count of available rooms in this typeRoom
                         if (avaliableRoomsTypes.ContainsKey(avRoom.Type))
                         {
-                            avaliableRoomsTypes[avRoom.Type] +=1;
+                            avaliableRoomsTypes[avRoom.Type] += 1;
                         }
                         else
                         {
@@ -111,9 +113,10 @@ namespace HotelProject.Controllers
                     //הודעת שגיאה למשתמש במקרה שאין חדרים פנויים בתאריך שנבחר
                     ViewBag.NoRoomFound = "Sorry, there are no avaliable rooms for the dates specified.";
                     ViewData["Error2"] = "אין חדרים פנויים בתאריכים הנבחרים. נא לבחור תאריכים אחרים";
+                   // HttpContext.Session.SetString("avaliableRooms", JsonConvert.SerializeObject(avaliableRooms));
                     return View("Index");
                 }
-               
+
             }
             else
             {
@@ -127,17 +130,22 @@ namespace HotelProject.Controllers
             }
             if (avaliableRoomsTypes.Count() > 0)
             {
-                
+
                 avaliableRoomsTypes.OrderByDescending(t => t.Key.ExtraBeds);
+               // HttpContext.Session.SetString("avaliableRooms", JsonConvert.SerializeObject(avaliableRooms));
                 return View("SearchResults", SearchResultslogic(avaliableRoomsTypes));
             }
             //הודעת שגיאה למשתמש במקרה שאין חדרים פנויים בתאריך שנבחר
             ViewBag.NoRoomFound = "Sorry, there are no avaliable rooms for the dates specified.";
+            //HttpContext.Session.SetString("avaliableRooms", JsonConvert.SerializeObject(avaliableRooms));
             return View("Index");
         }
 
         public Dictionary<RoomType, int> SearchResultslogic(Dictionary<RoomType, int> roomTypes)
         {
+            Dictionary<int, double> roomTypeTotal = null;
+            var orderStr = HttpContext.Session.GetString("newOrder");
+            Order newOrder = JsonConvert.DeserializeObject<Order>(orderStr);
             Dictionary<RoomType, int> OrderOptionsResult = new Dictionary<RoomType, int>();
             int numBadsForRoom, kidsForRoom, numOfnights;
             double totalPrice, priceForKid, priceFor1Adult;
@@ -146,19 +154,19 @@ namespace HotelProject.Controllers
             {
                 numBadsForRoom = roomType.Key.ExtraBeds + 2;
                 //מספר חדרים לפי 2 מבוגרים בחדר
-                numRooms = newOrder.NumOfAdults % 2 == 0 ? newOrder.NumOfAdults / 2 : (newOrder.NumOfAdults / 2) + 1;
+                int numRooms = newOrder.NumOfAdults % 2 == 0 ? newOrder.NumOfAdults / 2 : (newOrder.NumOfAdults / 2) + 1;
                 //במידה ויש ילדים בהזמנה
                 if (newOrder.NumOfKids > 0)
                 {
                     kidsForRoom = newOrder.NumOfKids % numRooms == 0 ? newOrder.NumOfKids / numRooms : newOrder.NumOfKids / numRooms + 1;
-                    if (kidsForRoom <= numBadsForRoom-2)
+                    if (kidsForRoom <= numBadsForRoom - 2)
                     {
                         if (numRooms <= roomType.Value)
                         {
                             priceForKid = roomType.Key.BasicPrice / 3;
                             priceFor1Adult = priceForKid * 2;
                             numOfnights = (newOrder.ToDate - newOrder.FromDate).Days;
-                            totalPrice = newOrder.NumOfAdults % 2 == 0 ? numRooms * roomType.Key.BasicPrice : (numRooms-1) * roomType.Key.BasicPrice + priceFor1Adult;
+                            totalPrice = newOrder.NumOfAdults % 2 == 0 ? numRooms * roomType.Key.BasicPrice : (numRooms - 1) * roomType.Key.BasicPrice + priceFor1Adult;
                             totalPrice += (newOrder.NumOfKids * priceForKid);
                             //הוספת תשלום ביטוח לתינוקות
                             totalPrice += newOrder.NumOfInfants * 40;
@@ -213,22 +221,31 @@ namespace HotelProject.Controllers
                         numOfnights = (newOrder.ToDate - newOrder.FromDate).Days;
                         totalPrice = newOrder.NumOfAdults % 2 == 0 ? numRooms * roomType.Key.BasicPrice : (numRooms - 1) * roomType.Key.BasicPrice + priceFor1Adult;
                         //הוספת תשלום ביטוח לתינוקות
-                        totalPrice += newOrder.NumOfInfants * 40; 
+                        totalPrice += newOrder.NumOfInfants * 40;
                         totalPrice *= numOfnights;
                         roomType.Key.BasicPrice = totalPrice;
                         if (roomTypeTotal == null)
                             roomTypeTotal = new Dictionary<int, double>();
-                            roomTypeTotal.Add(roomType.Key.Id, totalPrice);
+                        roomTypeTotal.Add(roomType.Key.Id, totalPrice);
                         OrderOptionsResult.Add(roomType.Key, numRooms);
                     }
 
                 }
+                HttpContext.Session.SetInt32("numRooms", numRooms);
+                HttpContext.Session.SetString("roomTypeTotal", JsonConvert.SerializeObject(roomTypeTotal));
             }
             return OrderOptionsResult;
         }
 
-        public IActionResult RedirectToPayment(int id, Order order)
+        public IActionResult RedirectToPayment(int id/*, Order order*/)
         {
+            var orderStr = HttpContext.Session.GetString("newOrder");
+            Order newOrder = JsonConvert.DeserializeObject<Order>(orderStr);
+            //var avaliableRoomsStr = HttpContext.Session.GetString("avaliableRooms");
+            //List<Room> avaliableRooms = JsonConvert.DeserializeObject<List<Room>>(avaliableRoomsStr);
+            var roomTypeTotalStr = HttpContext.Session.GetString("roomTypeTotal");
+            Dictionary<int, double> roomTypeTotal = JsonConvert.DeserializeObject<Dictionary<int, double>>(roomTypeTotalStr);
+            int? numRooms = HttpContext.Session.GetInt32("numRooms");
             var chosenTypeRoom = _context.RoomType.FirstOrDefault(r => r.Id == id); //OrderOptionsResult.Keys.FirstOrDefault(rt => rt.Id == id);
             if (chosenTypeRoom != null)
             {
@@ -236,10 +253,10 @@ namespace HotelProject.Controllers
 
                 if (TypeAvaliableRooms != null)
                 {
-                    HttpContext.Session.SetInt32("numRooms", numRooms);
+                    //HttpContext.Session.SetInt32("numRooms", numRooms);
                     for (int i = 0; i < numRooms; i++)
                     {
-                        HttpContext.Session.SetInt32("room"+i, TypeAvaliableRooms[i].Id);
+                        HttpContext.Session.SetInt32("room" + i, TypeAvaliableRooms[i].Id);
                         //RoomsOrders ro = new RoomsOrders();
                         //newOrder.Id = 999999;
                         //ro.OrderId = newOrder.Id;

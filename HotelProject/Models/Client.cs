@@ -9,8 +9,8 @@ namespace HotelProject.Models
     public class Client
     {
         //תעודת זהות
-        [Key]
         [Display(Name = "תעודת זהות")]
+        [MinLengthAttribute(9, ErrorMessage = "יש להקליד תעודת זהות עם 9 ספרות")]
         [RegularExpression("^[0-9]*$", ErrorMessage = "תעודת זהות שגויה"), StringLength(9)]
 
         //[DataType(DataType.)]
