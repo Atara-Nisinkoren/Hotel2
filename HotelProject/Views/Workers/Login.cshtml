@@ -1,7 +1,7 @@
 ﻿@model HotelProject.Models.Worker
 
 @{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "כניסת עובד";
 }
 <hr />
 <div class="row">
@@ -21,8 +21,8 @@
                 <span asp-validation-for="WorkerId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="התחבר" class="btn btn-warning"/>
-                
+                <input type="submit" value="התחבר" class="btn btn-warning" />
+
             </div>
             @if (ViewData["Error1"] != null)
             {
@@ -38,7 +38,11 @@
 <div>
     <a asp-action="Create">להרשמה לחץ כאן</a>
 </div>
-
+<br />
+<br />
+<br />
+<br />
+<br />
 @section Css{
     <link rel="stylesheet" href="~/css/Workers.css" />
 }
