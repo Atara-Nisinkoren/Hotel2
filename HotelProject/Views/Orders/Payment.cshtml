@@ -14,6 +14,7 @@
             <h1 class="paymentTitle"> פרטי ההזמנה</h1>
             <p>
                 <label>Ralon hotel <br></label>
+                <br />
                 <label>תאריך הגעה:</label>
                 <label>@Model.FromDate.ToString("dd/MM/yyyy")</label><br />
                 <label>תאריך עזיבה:</label>
@@ -49,27 +50,27 @@
                         <ul class="list">
                             <li>
                                 <label>תעודת זהות*</label><br>
-                                <input type="text" id="ID" name="ID">
+                                <input type="text" id="ID" name="ID" maxlength="9" min="9">
                                 <div id="errorID" style="color:red"></div>
                             </li>
                             <li>
                                 <label> שם מלא*</label><br>
-                                <input type="text" id="Name" name="Name">
+                                <input type="text" id="Name" name="Name" maxlength="25" min="25" >
                                 <div id="errorName" style="color:red"></div>
                             </li>
                             <li>
                                 <label>אימייל*</label><br>
-                                <input type="email" id="Email" name="Email">
+                                <input type="email" id="Email" name="Email" maxlength="25" min="25">
                                 <div id="errorEmail" style="color:red"></div>
                             </li>
                             <li>
                                 <label>טלפון*</label><br>
-                                <input type="tel" id="PhoneNumber" name="PhoneNumber">
+                                <input type="tel" id="PhoneNumber" name="PhoneNumber" maxlength="10" min="10">
                                 <div id="errorPhoneNumber" style="color:red"></div>
                             </li>
                             <li>
                                 <label>כתובת*</label><br>
-                                <input type="text" id="Address" name="Address">
+                                <input type="text" id="Address" name="Address" maxlength="35" min="35">
                                 <div id="errorAddress" style="color:red"></div>
                             </li>
                         </ul>
@@ -79,7 +80,7 @@
                         <ul class="list">
                             <li>
                                 <label>מספר כרטיס</label><br>
-                                <input type="text" id="cardNumber" name="cardNumber">
+                                <input type="text" id="cardNumber" name="cardNumber" maxlength="16" min="16">
                                 <div id="errorCardNumber" style="color:red"></div>
                             </li>
                             <li>
@@ -110,12 +111,12 @@
                             </li>
                             <li>
                                 <label>3 ספרות אחרונות בגב הכרטיס</label><br>
-                                <input type="text"  id="cvv" name="cvv">
+                                <input type="text"  id="cvv" name="cvv" maxlength="3" min="3">
                                 <div id="errorcvv" style="color:red"></div>
                             </li>
                             <li>
                                 <label>תעודת זהות של בעל הכרטיס</label><br>
-                                <input type="text" id="idCredit" name="idCredit">
+                                <input type="text" id="idCredit" name="idCredit"  maxlength="9" min="9">
                                 <div id="erroridCredit" style="color:red"></div>
                             </li>
                             <li>
@@ -245,9 +246,9 @@
             var ID = document.getElementById("ID").value;
             if (!validateID(ID)) {
                 isValid = false;
-                errorID.innerHTML = "תעודת זהות אינה תקינה";
+                errorID.innerHTML ="תעודת זהות חייבת להכיל בדיוק 9 ספרות";
             }
-
+            
             var Name = document.getElementById("Name").value;
             if (Name == "") {
                 isValid = false;
@@ -258,38 +259,38 @@
             var Email = document.getElementById("Email").value;
             if (!validateEmail(Email)) {
                     isValid = false;
-                errorEmail.innerHTML = "כתובת אימייל אינה תקינה";
+                errorEmail.innerHTML = "כתובת אימייל אינה תקינה, חייבת להכיל @@ וגם נקודה";
             }
 
             var PhoneNumber = document.getElementById("PhoneNumber").value;
             if (!validatePhoneNumber(PhoneNumber)) {
                 isValid = false;
-                errorPhoneNumber.innerHTML = "הטלפון אינו תקין";
+                errorPhoneNumber.innerHTML = "המספר טלפון אינו תקין, חייב להכיל רק 10 ספרות";
                
             }
 
            var Address = document.getElementById("Address").value;
             if (!validateAddress(Address)) {
                 isValid = false;
-                errorAddress.innerHTML = "כתובת אינה תקינה";
+                errorAddress.innerHTML = "כתובת אינה תקינה, צריכה להיות בעברית";
             }
 
             var cardNumber = document.getElementById("cardNumber").value;
             if (!validatecardNumber(cardNumber)) {
                 isValid = false;
-                errorCardNumber.innerHTML = "מספר כרטיס אינו תקין";
+                errorCardNumber.innerHTML = "מספר כרטיס אינו תקין, חייב להכיל 16 ספרות בדיוק";
             }
 
             var cvv = document.getElementById("cvv").value;
             if (!validatecvv(cvv)) {
                 isValid = false;
-                errorcvv.innerHTML = "ספרות אינן תקינות";
+                errorcvv.innerHTML = "חייב להכיל 3 ספרות בדיוק";
             }
 
             var idCredit = document.getElementById("idCredit").value;
             if (!validateidCredit(idCredit)) {
                 isValid = false;
-                erroridCredit.innerHTML = "תעודת זהות אינה תקינה";
+                erroridCredit.innerHTML = "תעודת זהות חייבת להכיל בדיוק 9 ספרות";
             }
 
 
