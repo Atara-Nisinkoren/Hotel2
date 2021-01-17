@@ -97,11 +97,11 @@ namespace HotelProject.Controllers
                     return RedirectToAction("ManagerPage");
                 }
                 else
-                    ViewData["Error1"] = "You do not have permission to  modifying and editing data in the website";
+                    ViewData["Error1"] = "אין לך הרשאה לשנות ולערוך נתונים באתר";
             }
             else
             {
-                ViewData["Error"] = "Worker does not exist!";
+                ViewData["Error"] = "לקוח לא קיים!";
             }
             return View(worker);
         }
