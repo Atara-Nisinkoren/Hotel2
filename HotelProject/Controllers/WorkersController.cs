@@ -72,6 +72,7 @@ namespace HotelProject.Controllers
         // GET: Workers/Create
         public IActionResult Login()
         {
+            
             return View();
         }
 

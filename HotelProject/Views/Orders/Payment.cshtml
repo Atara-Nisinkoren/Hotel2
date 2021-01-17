@@ -14,7 +14,8 @@
             <h1 class="paymentTitle"> פרטי ההזמנה</h1>
             <p>
                 <label>Ralon hotel <br></label>
-                <label>תאריך הגעה:<br /></label>
+                <br />
+                <label>תאריך הגעה:</label>
                 <label>@Model.FromDate.ToString("dd/MM/yyyy")</label><br />
                 <label>תאריך עזיבה:</label>
                 <label>@Model.ToDate.ToString("dd/MM/yyyy")</label><br />
@@ -54,7 +55,7 @@
                             </li>
                             <li>
                                 <label> שם מלא*</label><br>
-                                <input type="text" id="Name" name="Name" maxlength="25" min="25">
+                                <input type="text" id="Name" name="Name" maxlength="25" min="25" >
                                 <div id="errorName" style="color:red"></div>
                             </li>
                             <li>
@@ -109,12 +110,12 @@
                             </li>
                             <li>
                                 <label>3 ספרות אחרונות בגב הכרטיס</label><br>
-                                <input type="text" id="cvv" name="cvv" maxlength="3" min="3">
+                                <input type="text"  id="cvv" name="cvv" maxlength="3" min="3">
                                 <div id="errorcvv" style="color:red"></div>
                             </li>
                             <li>
                                 <label>תעודת זהות של בעל הכרטיס</label><br>
-                                <input type="text" id="idCredit" name="idCredit" maxlength="9" min="9">
+                                <input type="text" id="idCredit" name="idCredit"  maxlength="9" min="9">
                                 <div id="erroridCredit" style="color:red"></div>
                             </li>
                             <li>
@@ -229,9 +230,9 @@
             var ID = document.getElementById("ID").value;
             if (!validateID(ID)) {
                 isValid = false;
-                errorID.innerHTML = "תעודת זהות חייבת להכיל בדיוק 9 ספרות";
+                errorID.innerHTML ="תעודת זהות חייבת להכיל בדיוק 9 ספרות";
             }
-
+            
             var Name = document.getElementById("Name").value;
             if (Name == "") {
                 isValid = false;
@@ -239,14 +240,14 @@
             }
             var Email = document.getElementById("Email").value;
             if (!validateEmail(Email)) {
-                isValid = false;
+                    isValid = false;
                 errorEmail.innerHTML = "כתובת אימייל אינה תקינה, חייבת להכיל @@ וגם נקודה";
             }
             var PhoneNumber = document.getElementById("PhoneNumber").value;
             if (!validatePhoneNumber(PhoneNumber)) {
                 isValid = false;
                 errorPhoneNumber.innerHTML = "המספר טלפון אינו תקין, חייב להכיל רק 10 ספרות";
-
+               
             }
             var Address = document.getElementById("Address").value;
             if (!validateAddress(Address)) {
