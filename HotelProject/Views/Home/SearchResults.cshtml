@@ -10,14 +10,17 @@
         <div class="card mb-3 mbb">
             <div class="row no-gutters">
                 <div class="col-md-6">
-                    <img src="../@room.Key.ImgUrl" class="card-img" alt="...">
+                    <img src="../@room.Key.ImgUrl" class="card-img imgSize" alt="...">
                 </div>
                 <div class="col-md-6">
                     <div class="card-body">
-                        <h5 class="card-title right">@room.Key.Name</h5>
-                        <p class="card-text right fsize">
-                            @room.Key.Desc
-                        </p>
+                        <h2 class="card-title right">@room.Key.Name</h2>
+                        <p class="card-text right fsize roomDes"></p>
+                        <h5>
+                            <p class="right white">
+                                @room.Key.Desc
+                            </p>
+                        </h5>
                         <div id="moreDetailes">
                             <hr />
                             <dl class="row hebrew">
@@ -35,16 +38,24 @@
                                 </dd>
                             </dl>
                         </div>
-                        <a asp-controller="Home" asp-action="RedirectToPayment" asp-route-id="@room.Key.Id" asp-route-numRooms=" @room.Value" type="submit" class="btn btn-outline-warning">
+                        <br />
+
+
+
+                        <a asp-controller="Home" asp-action="RedirectToPayment" asp-route-id="@room.Key.Id" type="submit" class="btn btn-outline-warning">
                             הזמן
                             עכשיו
                         </a>
+
                     </div>
                 </div>
             </div>
         </div>
     }
 </form>
+
+
+
 
 @section Css{
     <link rel="stylesheet" href="~/css/searchResults.css" />
