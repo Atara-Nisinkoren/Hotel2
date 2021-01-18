@@ -54,6 +54,10 @@ namespace HotelProject.Controllers
         // GET: Workers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            if (HttpContext.Session.GetString("Name") == null)
+            {
+                return RedirectToAction("Login", "Workers");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -130,6 +134,10 @@ namespace HotelProject.Controllers
         // GET: Workers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (HttpContext.Session.GetString("Name") == null)
+            {
+                return RedirectToAction("Login", "Workers");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -187,6 +195,10 @@ namespace HotelProject.Controllers
         // GET: Workers/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (HttpContext.Session.GetString("Name") == null)
+            {
+                return RedirectToAction("Login", "Workers");
+            }
             if (id == null)
             {
                 return NotFound();

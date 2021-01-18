@@ -24,12 +24,20 @@ namespace HotelProject.Controllers
         // GET: Orders
         public async Task<IActionResult> Index()
         {
+            if (HttpContext.Session.GetString("Name") == null)
+            {
+                return RedirectToAction("Login", "Workers");
+            }
             return View(await _context.Order.Include(o=> o.Client).Include(or=> or.Rooms).ToListAsync());
         }
 
         // GET: Orders/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            if (HttpContext.Session.GetString("Name") == null)
+            {
+                return RedirectToAction("Login", "Workers");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -48,6 +56,8 @@ namespace HotelProject.Controllers
         [HttpGet]
         public IActionResult Payment(Order order)
         {
+            if (order == null || order.NumOfAdults == 0) 
+                return RedirectToAction("Index", "Home");
             ViewBag.NumOfRooms = HttpContext.Session.GetInt32("numRooms").ToString();
             return View(order);
         }
@@ -108,6 +118,10 @@ namespace HotelProject.Controllers
         // GET: Orders/Create
         public IActionResult Create()
         {
+            if (HttpContext.Session.GetString("Name") == null)
+            {
+                return RedirectToAction("Login", "Workers");
+            }
             return View();
         }
 
@@ -132,6 +146,10 @@ namespace HotelProject.Controllers
         // GET: Orders/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (HttpContext.Session.GetString("Name") == null)
+            {
+                return RedirectToAction("Login", "Workers");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -193,6 +211,10 @@ namespace HotelProject.Controllers
         // GET: Orders/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (HttpContext.Session.GetString("Name") == null)
+            {
+                return RedirectToAction("Login", "Workers");
+            }
             if (id == null)
             {
                 return NotFound();

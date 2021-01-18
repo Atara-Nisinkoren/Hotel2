@@ -29,6 +29,10 @@ namespace HotelProject.Controllers
         // GET: RoomTypes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            if (HttpContext.Session.GetString("Name") == null)
+            {
+                return RedirectToAction("Login", "Workers");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -77,6 +81,10 @@ namespace HotelProject.Controllers
         // GET: RoomTypes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (HttpContext.Session.GetString("Name") == null)
+            {
+                return RedirectToAction("Login", "Workers");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -132,6 +140,10 @@ namespace HotelProject.Controllers
         // GET: RoomTypes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (HttpContext.Session.GetString("Name") == null)
+            {
+                return RedirectToAction("Login", "Workers");
+            }
             if (id == null)
             {
                 return NotFound();
