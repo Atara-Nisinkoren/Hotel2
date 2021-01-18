@@ -29,10 +29,6 @@ namespace HotelProject.Controllers
         // GET: RoomTypes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (HttpContext.Session.GetString("Name") == null)
-            {
-                return RedirectToAction("Login", "Workers");
-            }
             if (id == null)
             {
                 return NotFound();
